@@ -1,0 +1,25 @@
+/* * {
+    box-sizing: border-box;
+} */
+
+
+.box-1 {
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    padding: 50px;
+    border: 10px solid green;
+}
+.box-2 {
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    padding: 50px;
+    border: 10px solid green;
+    box-sizing: border-box;
+}
+.btn-register {
+    padding: 12px 24px 12px 24px;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
