@@ -139,11 +139,13 @@
 
     .item {
         background-color: white;
+        border: transparent;
         border-radius: 25px;
 
         img {
             width: 295px;
-            aspect-ratio: 295/350;
+            height: 350px;
+            object-fit: cover;
         }
 
         .item-description {
