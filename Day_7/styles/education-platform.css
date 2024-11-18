@@ -521,7 +521,7 @@ header nav ul li:last-child {
     height: 2.8rem;
 }
 
-.author-quote p {
+.author-quote blockquote {
     font-size: 2.6rem;
     font-style: italic;
     font-weight: 400;
@@ -628,6 +628,12 @@ header nav ul li:last-child {
     font-size: 1.6rem;
     font-weight: 600;
     text-align: center;
+    outline: 2px solid #FFB900;
+}
+
+.cta-btn:hover {
+    background-color: #FFFFFF;
+    color: #FFB900;
 }
 
 #blogs-section {
@@ -806,7 +812,7 @@ footer p,
 
 .footer-column-links li,
 .footer-column-links a,
-.footer-column-links strong
+.footer-column-links strong,
 .footer-column-links address {
     color: #BFBCB2;
     font-size: 1.4rem;
@@ -817,7 +823,7 @@ footer p,
 
 .footer-column-links strong {
     color: white;
-    font-style: normal;
+    font-weight: 600;
 }
 
 .footer-column-links address {
