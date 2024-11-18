@@ -8,42 +8,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles/education-platform.css">
 </head>
 <body>
     <div class="container">
         <header>
             <nav>
-                <ul>
+                <ul class="flex-space-between-center">
                     <li><a class="brand-name" href="#">Lesson<span>.</span></a></li>
-                    <li class="nav-link"><a href=""#>Home</a></li>
+                    <li class="nav-link"><a href="#">Home</a></li>
                     <li class="nav-link"><a href="#">Course</a></li>
                     <li class="nav-link"><a href="#">Pricing</a></li>
                     <li class="nav-link"><a href="#">Reviews</a></li>
-                    <li><a href="#"><button type="button">Sign Up</button></a></li>
+                    <li><a class="btn-sign-up" href="#">Sign Up</a></li>
                 </ul>
             </nav>
         </header>
-        <section id="hero">
+        <section id="hero" class="flex">
             <div class="hero-image-container">
                 <img class="hero-image" src="images/guy-lesson.png" alt="Studying guy image">
-                <div class="hero-image-overlay">
-                    <div class="course-category">
-                        <img src="images/ui-ux-icon.svg" alt="">
-                        <div class="category-info">
+                <div class="hero-image-overlay flex">
+                    <div class="course-category flex">
+                        <img src="images/ui-ux-icon.svg" alt="UI/UX icon">
+                        <div class="category-info flex">
                             <span>20 Courses</span>
                             <strong>UI/UX Design</strong>
                         </div>
                     </div>
-                    <div class="course-category">
-                        <img src="images/development-icon.svg" alt="">
+                    <div class="course-category flex">
+                        <img src="images/development-icon.svg" alt="Development icon">
                         <div class="category-info">
                             <span>20 Courses</span>
                             <strong>Development</strong>
                         </div>
                     </div>
-                    <div class="course-category">
-                        <img src="images/marketing-icon.svg" alt="">
+                    <div class="course-category flex">
+                        <img src="images/marketing-icon.svg" alt="Marketing icon">
                         <div class="category-info">
                             <span>30 Courses</span>
                             <strong>Marketing</strong>
@@ -58,11 +59,11 @@
                    courses, certificates, and degrees from world-class<br>
                    universities and companies.
                 </p>
-                <div class="hero-buttons">
-                    <button type="button" class="btn-see-course">See Courses</a></button>
-                    <div class="btn-watch-video">
+                <div class="hero-buttons flex-align-center">
+                    <button type="button" class="btn-see-course">See Courses</button>
+                    <div class="btn-watch-video flex-align-center">
                         <a class="video-link" href="#">
-                            <div class="circle">
+                            <div class="circle flex-align-center">
                                 <div class="triangle"></div>
                             </div>
                         </a>
@@ -71,7 +72,7 @@
                 </div>
                 <div class="engagement-section">
                     <h2>Recent engagement</h2>
-                    <div class="engagement-info">
+                    <div class="engagement-info flex-align-center">
                         <strong>50K <span>Students</span></strong>
                         <strong>70+ <span>Course</span></strong>
                     </div>
@@ -79,11 +80,11 @@
             </div>
         </section>
         <section id="popular-courses">
-            <h1>Our popular courses</h1>
+            <h2>Our popular courses</h2>
             <p id="popular-courses-intro">Build new skills with new trendy courses and shine<br>
                for the next future career.
             </p>
-            <div class="slide-buttons">
+            <div class="slide-buttons flex">
                 <div class="slide-button slide-left"></div>
                 <div class="slide-button slide-right"></div>
             </div>
@@ -91,17 +92,17 @@
                 <div class="card">
                     <a href="#"><img src="images/basic-web-design.jpg" alt="Basic web design image"></a>
                     <div class="card-info">
-                        <div class="card-title">
-                            <h2>Basic web design</h2>
-                            <div class="course-rating">
+                        <div class="card-title flex-space-between-center">
+                            <h3>Basic web design</h3>
+                            <div class="course-rating flex-align-center">
                                 <img src="images/star-icon.svg" alt="rating icon"><span>4.5</span>
                             </div>
                         </div>
                         <p class="card-detail">Get the best course, gain knowledge and<br>
                             shine for your future career.
                         </p>
-                        <div class="price-and-buy">
-                            <p class="price">$120.75</p>
+                        <div class="price-and-buy flex-space-between-center">
+                            <span class="price">$120.75</span>
                             <a class="btn-book-now" href="">Book Now</a>
                         </div>
                     </div>
@@ -109,17 +110,17 @@
                 <div class="card">
                     <a href="#"><img src="images/ui-ux-design.jpg" alt="UI/UX design image"></a>
                     <div class="card-info">
-                        <div class="card-title">
-                            <h2>UI/UX design</h2>
-                            <div class="course-rating">
+                        <div class="card-title flex-space-between-center">
+                            <h3>UI/UX design</h3>
+                            <div class="course-rating flex-align-center">
                                 <img src="images/star-icon.svg" alt="rating icon"><span>4.5</span>
                             </div>
                         </div>
                         <p class="card-detail">Get the best course, gain knowledge and<br>
                             shine for your future career.
                         </p>
-                        <div class="price-and-buy">
-                            <p class="price">$120.75</p>
+                        <div class="price-and-buy flex-space-between-center">
+                            <span class="price">$120.75</span>
                             <a class="btn-book-now" href="">Book Now</a>
                         </div>
                     </div>
@@ -127,23 +128,171 @@
                 <div class="card">
                     <a href="#"><img src="images/web-app-design.png" alt="Web App design image"></a>
                     <div class="card-info">
-                        <div class="card-title">
-                            <h2>Web App design</h2>
-                            <div class="course-rating">
+                        <div class="card-title flex-space-between-center">
+                            <h3>Web App design</h3>
+                            <div class="course-rating flex-align-center">
                                 <img src="images/star-icon.svg" alt="rating icon"><span>4.5</span>
                             </div>
                         </div>
                         <p class="card-detail">Get the best course, gain knowledge and<br>
                             shine for your future career.
                         </p>
-                        <div class="price-and-buy">
-                            <p class="price">$120.75</p>
+                        <div class="price-and-buy flex-space-between-center">
+                            <span class="price">$120.75</span>
                             <a class="btn-book-now" href="">Book Now</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <section id="testimonial" class="flex">
+            <div class="author">
+                <img class="author-image" src="images/testomonial-author.svg" alt="Author picture">
+                <h2 class="author-name">Peter Moor</h2>
+                <span class="author-title">Student of Web Design</span>
+            </div>
+            <div class="author-quote">
+                <img class="quotation-mark-icon" src="images/quotation-mark.svg" alt="Quotation mark icon">
+                <p>
+                    Not only does my resume look impressive—filled with the<br>
+                    names and logos of world-class institutions—but these<br>
+                    certificates also bring me closer to my career goals by<br>
+                    validating the skills I've learned." 
+                </p>
+            </div>
+            <div class="dots flex-space-between-center">
+                <div class="dot"></div>
+                <div class="dot dot-active"></div>
+                <div class="dot"></div>
+            </div>
+        </section>
+        <section id="call-to-action" class="flex">
+           <div class="cta flex-space-between-center">
+                <div class="cta-images flex">
+                    <img class="cta-image" src="images/business-man-1.png" alt="Business man thinking image">
+                    <img class="cta-image" src="images/business-man-2.png" alt="Business man working image"> 
+                </div>
+                <div class="cta-content">
+                    <h2>Learner outcomes through our awesome platform</h2>
+                    <p>87% of people learning for professional development<br>
+                        report career benefits like getting a promotion, a raise, or<br>
+                        starting a new career.
+                    </p>
+                    <cite>Lesson Impact Report (2022)</cite>
+                    <a class="cta-btn" href="#">Sign Up</a>
+                </div>
+           </div>
+           <div class="cta flex-space-between-center">
+                <img class="cta-image" src="images/business-man-3.png" alt="Business man working image">
+                <div class="cta-content">
+                    <h2>Take the next step toward your<br>
+                        personal and professional goals<br>
+                        with Lesson.</h2>
+                    <p>Take the next step toward. Join now to receive personalized  and more<br>
+                        recommendations from the full Coursera catalog.
+                    </p>
+                    <a class="cta-btn" href="#">Join Now</a>
+                </div>
+           </div>
+        </section>
+        <section id="blogs-section" class="flex-space-between-center">
+            <h2>Our blog</h2>
+            <p>Read our regular travel blog and know the latest update<br>
+                of tour and travel</p>
+            <ul class="blogs flex-space-between-center">
+                <li class="blog">
+                    <img src="images/blog-image-1.png" alt="Web designer working image">
+                    <div class="blog-info flex">
+                        <div class="blog-posted-time flex-align-center">
+                            <div class="dot dot-active"></div>
+                            <time datetime="2021-11-21">21 November 2021</time>
+                        </div>
+                        <div class="horizontal-line"></div>
+                        <h3 class="blog-title">How to become a pro web designer in<br> 
+                            2022 and get remot job?</h3>
+                        <a class="blog-btn" href="#">Read More</a>
+                    </div>
+                </li>
+                <li class="blog">
+                    <img src="images/blog-image-2.png" alt="Web designer listen to music image">
+                    <div class="blog-info flex">
+                        <div class="blog-posted-time flex-align-center">
+                            <div class="dot dot-active"></div>
+                            <time datetime="2021-11-21">21 November 2021</time>
+                        </div>
+                        <div class="horizontal-line"></div>
+                        <h3 class="blog-title">How to become a pro web designer in<br> 
+                            2022 and get remot job?</h3>
+                        <a class="blog-btn" href="#">Read More</a>
+                    </div>
+                </li>
+                <li class="blog">
+                    <img src="images/blog-image-3.png" alt="Web designer try hard image">
+                    <div class="blog-info flex">
+                        <div class="blog-posted-time flex-align-center">
+                            <div class="dot dot-active"></div>
+                            <time datetime="2021-11-21">21 November 2021</time>
+                        </div>
+                        <div class="horizontal-line"></div>
+                        <h3 class="blog-title">How to become a pro web designer in<br> 
+                            2022 and get remot job?</h3>
+                        <a class="blog-btn" href="#">Read More</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="blog-dots flex-space-between-center">
+                <div class="dot"></div>
+                <div class="dot dot-active"></div>
+                <div class="dot"></div>
+            </div>
+        </section>
+        <footer>
+            <div class="footer-columns flex">
+                <div class="footer-column">
+                    <a class="brand-name" href="#">Lesson<span>.</span></a>
+                    <p>Need to help for your dream Career?<br>
+                        trust us. With Lesson, study becomes<br>
+                        a lot easier with us.</p>
+                    <ul class="social-media">
+                        <li><a href="#"><i class='bx bxl-twitter'></i></a></li>
+                        <li><a href="#"><i class='bx bxl-facebook'></i></a></li>
+                        <li><a href="#"><i class='bx bxl-linkedin'></i></a></li>
+                        <li><a href="#"><i class='bx bxl-instagram'></i></a></li>                   
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <div class="horizontal-line"></div>
+                    <ul class="footer-column-links flex">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Our Pricing</a></li>
+                        <li><a href="#">Latest News</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <div class="horizontal-line"></div>
+                    <ul class="footer-column-links flex">
+                        <li><a href="#">FAQ’s</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Address</h3>
+                    <div class="horizontal-line"></div>
+                    <ul class="footer-column-links flex">
+                        <li><address><strong>Location: </strong><a href="#">27 Division St, New York,<br>NY 10002, USA</a></address></li>
+                        <li><strong>Email: </strong><a href="mailto:email@gmail.com">email@gmail.com</a></li>
+                        <li><strong>Phone: </strong><a href="tel:+0001234567890">+ 000 1234 567 890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="horizontal-line"></div>
+            <p class="copyright">Copyright ©2022 webdesign.gdn All rights reserved</p>
+        </footer>
     </div>
 </body>
 </html>
