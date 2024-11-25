@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2: Create layout applying grid template</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .container {
+            width: 900px;
+            height: 360px;
+            display: grid;
+            gap: 3px;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: 1fr;
+        }
+
+        .item {
+            text-align: center;
+            background-color: orange;
+        }
+        
+        .col {
+            color: white;
+            display: grid;
+            gap: 3px;
+            text-align: center;
+        }
+
+        .col:first-child {
+            background: orange;
+        }
+
+        .col:nth-child(2) {
+            grid-template-rows: repeat(2, 1fr);
+        }
+
+        .col:nth-child(3) {
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .col:nth-child(4) {
+            grid-template-rows: repeat(4, 1fr);
+        }
+
+        .col:nth-child(5) {
+            grid-template-rows: repeat(6, 1fr);
+        }
+
+        .col:nth-child(6) {
+            grid-template-rows: repeat(12, 1fr);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col">1</div>
+        <div class="col">
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+        <div class="col">
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+        </div>
+        <div class="col">
+            <div class="item">7</div>
+            <div class="item">8</div>
+            <div class="item">9</div>
+            <div class="item">10</div>
+        </div>
+        <div class="col">
+            <div class="item">11</div>
+            <div class="item">12</div>
+            <div class="item">13</div>
+            <div class="item">14</div>
+            <div class="item">15</div>
+            <div class="item">16</div>
+        </div>
+        <div class="col">
+            <div class="item">17</div>
+            <div class="item">18</div>
+            <div class="item">19</div>
+            <div class="item">20</div>
+            <div class="item">21</div>
+            <div class="item">22</div>
+            <div class="item">23</div>
+            <div class="item">24</div>
+            <div class="item">25</div>
+            <div class="item">26</div>
+            <div class="item">27</div>
+            <div class="item">28</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* .container {
+            border: 1px solid red;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
+
+        .item {
+            text-align: center;
+            grid-column: span 3;
+            background-color: aquamarine;
+            border: 1px solid green;
+        }
+
+        .top {
+            grid-column: span 6;
+        }
+
+        .mid {
+            grid-column: span 4;
+        }
+
+        .layout {
+            grid-template-columns: repeat(5, 1fr);
+            border: 1px solid orange;
+        }
+
+        
+        .layout {
+            display: grid;
+            grid-template-columns: 100px 100px 1fr;
+            grid-template-rows: 1fr 100px 1fr;
+            border: 1px solid orange;
+            width: 250px;
+            height: 200px;
+        }
+
+        .brick {
+            background-color: aqua;
+            border: 1px solid green;
+            text-align: center;
+        }
+
+        .brick:nth-child(1) {
+            grid-column: span 3;
+        }
+
+        .brick:nth-child(2),
+        .brick:nth-child(3) {
+            grid-column: span 1;
+        }
+
+        .brick:nth-child(4) {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        .brick:nth-child(5) {
+            grid-column: span 2;
+        }
+
+        .layout-2 {
+            border: 1px solid blue;
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            grid-template-rows: 100px minmax(70%, 1fr) minmax(30%, 1fr) 60px;
+        }
+
+        .layout-item {
+            background-color: orange;
+            border: 1px solid green;
+            text-align: center;
+        }
+
+        .header {
+            grid-column: span 3;
+        }
+
+        .side-bar {
+            grid-row: span 2;
+        }
+
+        .footer {
+            grid-column: span 3;
+        } */
+
+        *{
+            box-sizing: border-box;
+        }
+
+        .area {
+            border: 1px blue solid;
+            display: grid;
+            grid-template-areas: 
+            "header header header",
+            "left main right",
+            "footer footer footer";
+        }
+
+        .area-item {
+            border: 1px blue solid;
+        }
+
+        .header {
+            grid-area: header;
+        }
+
+        .area-left {
+            grid-area: left;
+        }
+
+        
+        .area-right {
+            grid-area: right;
+        }
+
+        .area-main {
+            grid-area: main;
+        }
+
+        .area-footer {
+            grid-area: footer;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- <div class="container">
+        <div class="item top">Item 1</div>
+        <div class="item top">Item 2</div>
+        <div class="item mid">Item 3</div>
+        <div class="item mid">Item 4</div>
+        <div class="item mid">Item 5</div>
+        <div class="item">Item 6</div>
+        <div class="item">Item 7</div>
+        <div class="item">Item 8</div>
+        <div class="item">Item 9</div>
+    </div>
+
+    <div class="layout">
+        <div class="brick">1</div>
+        <div class="brick">2</div>
+        <div class="brick">3</div>
+        <div class="brick">4</div>
+        <div class="brick">5</div>
+    </div>
+
+    <div class="layout-2">
+        <div class="layout-item header">Header</div>
+        <div class="layout-item side-bar left">Left Side</div>
+        <div class="layout-item content">Main content</div>
+        <div class="layout-item side-bar right">Right Side</div>
+        <div class="layout-item comment">Comment Section</div>
+        <div class="layout-item footer">Footer</div>
+    </div> -->
+
+    <div class="area">
+        <div class="area-item area-header">Header</div>
+        <div class="area-item area-left-side">Left</div>
+        <div class="area-item area-main">Main</div>
+        <div class="area-item area-right-side">Right</div>
+        <div class="area-item area-footer">Footer</div>
+    </div>
+</body>
+</html>

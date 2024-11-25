@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>Exercise 1: Grid template area</title>
+    <style>
+        .layout {
+            margin: 0 auto;
+            width: 600px;
+            height: 700px;
+            display: grid;
+            grid-template-columns: repeat(3, 33.3%);
+            grid-template-rows: 10% 75% 5% 10%;;
+            grid-template-areas: 
+            "header header header"
+            "left-side-bar main right-side-bar"
+            "left-side-bar sub-content right-side-bar"
+            "footer footer footer";
+        }
+
+        .component {
+            border: 1px dotted blue;
+        }
+
+        header {
+            grid-area: header;
+        }
+
+        .left-side-bar {
+            grid-area: left-side-bar;
+        }
+
+        main {
+            grid-area: main;
+        }
+
+        .right-side-bar {
+            grid-area: right-side-bar;
+        }
+
+        .sub {
+            grid-area: sub-content
+        }
+
+        footer {
+            grid-area: footer;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <header class="component">Header</header>
+        <div class="component left-side-bar">Left content</div>
+        <main class="component">Main content</main>
+        <div class="component right-side-bar">Right content</div>
+        <div class="component sub">Sub content</div>
+        <footer class="component footer">Footer</footer>
+    </div>
+</body>
+</html>

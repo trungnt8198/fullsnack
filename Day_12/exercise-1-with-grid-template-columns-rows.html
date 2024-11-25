@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1: Grid template columns and rows with grid row and grid column</title>
+    <style>
+        .layout {
+            display: grid;
+            margin: 0 auto;
+            width: 600px;
+            height: 700px;
+            grid-template-columns: repeat(3, 33.3%);
+            grid-template-rows: 10% 75% 5% 10%;
+        }
+
+        .component {
+            border: 1px dotted blue;
+        }
+
+        header {
+            grid-column: span 3;
+        }
+
+        .side-bar {
+            grid-row: span 2;
+        }
+        
+        footer {
+            grid-column: span 3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <header class="component">Header</header>
+        <div class="component side-bar left">Left content</div>
+        <main class="component">Main content</main>
+        <div class="component side-bar right">Right content</div>
+        <div class="component sub">Sub content</div>
+        <footer class="component footer">Footer</footer>
+    </div>
+</body>
+</html>

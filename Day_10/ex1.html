@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            display: inline-block;
+            text-align: center;
+            border-bottom: 2px dashed red;
+            width: 200px;
+            position: relative;
+        }
+        h1::after {
+            content: "";
+            height: 2px;
+            position: absolute;
+            background-color: red;
+            left: 25%;
+            bottom: -2px;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1>About Us</h1>
+    </section>
+</body>
+</html>
