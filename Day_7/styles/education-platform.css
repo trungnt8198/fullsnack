@@ -63,7 +63,7 @@ ul {
 .nav-link a::after {
     content: "";
     position: absolute;
-    left: 0.1rem;
+    left: 0;
     bottom: -0.2rem;
     width: 0; 
     height: 0.2rem; 
