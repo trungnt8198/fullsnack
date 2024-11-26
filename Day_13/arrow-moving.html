@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Moving Animation</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+
+        .body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            margin: 60px auto;
+            width: 600px;
+            height: 600px;
+            border: 1px solid red;
+            position: relative;
+        }
+
+        .arrow {
+            font-size: 60px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            animation: moveSquare 6s linear infinite, 
+                       rotateCorner 6s steps(1) infinite;
+        }
+
+        @keyframes moveSquare {
+            0% {
+                top: 0%;
+                left: 0%;
+
+            }
+
+            25% {
+                top: 100%;
+                left: 0%;  
+            }
+
+            50% {
+                top: 100%;
+                left: 100%;
+            }
+
+            75% {
+                top: 0%;
+                left: 100%;
+            }
+
+            100% {
+                top: 0%;
+                left: 0%;
+            }
+        }
+
+        @keyframes rotateCorner {
+            0% {
+                
+            }
+
+            25% {
+                transform: translate(-50%, -50%) rotate(-90deg);   
+            }
+
+            50% {
+                transform: translate(-50%, -50%) rotate(-180deg);
+            }
+
+            75% {
+                transform: translate(-50%, -50%) rotate(-270deg); 
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <i class='arrow bx bx-down-arrow-alt'></i>
+    </div>
+</body>
+</html>

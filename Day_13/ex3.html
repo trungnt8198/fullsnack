@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            animation: slideIn ease-in 3s infinite alternate-reverse;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-100%);
+                background-color: orange;
+            }
+
+            50% {
+                transform: translate(50%, 100%) scale(1.5);
+                background: pink;
+            }
+
+            100% {
+                transform: translateX(200%) scale(1);
+                background-color: blueviolet;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .sale {
+            padding: 12px 0;
+            background-color: black;
+            color: white;
+        }
+
+        .sale-content {
+            animation: slideIn 4s ease infinite;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(100%);
+            }
+
+            50% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sale">
+        <p class="sale-content">Sale hot up to 200K VND for Winter clothes</p>
+    </div>
+</body>
+</html>
