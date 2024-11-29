@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+    --font-family-primary: 'Montserrat', serif;
+    --font-size-primary: 1.3rem;
+    --line-height-primary: 1.425;
+    --color-primary: #000;
+    --primary-background-color: #fff;
+}
+
+html {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-primary);
+    line-height: var(--line-height-primary);
+}
+
+body {
+    background-color: grey;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-end {
+    justify-content: end;
+}
+
+.container {
+    background-color: #edf1f5;
+}
+
+header {
+    padding: 0 10rem;
+    background-color: var(--primary-background-color);
+    height: 8rem;
+}
+
+.header__brand {
+    position: relative;
+    margin-right: 7rem;
+    min-width: 1.5rem;
+}
+
+.header__logo {
+    height: 3.8rem;
+}
+
+.header__brand::after {
+    content: "";
+    background-image: url(../images/black-friday-tag-logo.svg);
+    width: 5.2rem;
+    height: 3.9rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 100%;
+    top: -0.8rem;
+    margin-left: -0.2rem;
+}
+
+.header__nav > ul > li > a {
+    text-transform: uppercase;
+    flex: 1;
+}
+
+.menu__link > a {
+    font-size: .9411vw;
+    font-weight: 700;
+    line-height: 4rem;
+    color: var(--color-primary);
+    padding: 0 .9411vw;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+}
+
+.menu__link > a::after {
+    content: '';
+    background: #da291c;
+    border-radius: 0.4rem 0.4rem 0 0;
+    height: 0.4rem;
+    width: 3.2rem;
+    position: absolute;
+    left: 50%;
+    margin-left: -1.6rem;
+    top: 100%;
+    margin-top: 1.6rem;
+    transition: all .2s ease;
+    transform: scaleX(0); 
+}
+
+.menu__link > a:hover::after {
+    transform: scaleX(1);
+}
+
+.menu__link > a::before {
+    content: "";
+    background-color: transparent;
+    width: 100%;
+    height: 1.6rem;
+    top:100%;
+    left: 0;
+    position: absolute;
+}
+
+.menu__link:hover > .menu__dropdown{
+    display: block;
+}
+
+.menu__dropdown {
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #e6e7e8;
+    padding-left: 7.64vw;
+    padding-right: 7.64vw;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    display: none;
+}
+
+.dropdown__inner{
+    padding-left: 10.5rem;
+}
+
+.header__search {
+    position: relative;
+}
+
+.sub__menu > li,
+.sub__menu > li > a {
+    font-size: .8235vw;
+    line-height: 1.425;
+    color: #333f48;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+li.sub__menu__title,
+.sub__menu__title
+ {
+    font-weight: 700;
+    font-size: .8235vw;
+    display: block;
+}
+
+.dropdown__left {
+    border-right: 0.1rem solid #e6e7e8;
+    padding: 3.6rem 3rem 4.6rem 0;
+    width: 13.87%;
+}
+
+.dropdown__left ul:first-child {
+     margin-bottom: 1.927vw;
+}
+
+.sub__menu__label-link {
+    position: relative;
+}
+
+.sub__menu__label-link::before {
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background-image: url(../images/link-label.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    position: absolute;
+    left: -3rem;
+}
+
+.sub__menu > li > a:hover {
+    color: #da291c;
+}
+
+.dropdown__mid {
+    padding: 3.6rem 5rem 4.6rem 5rem;
+}
+
+.dropdown__mid__inner > ul:nth-child(2){
+    margin-left: 5rem;
+}
+
+.dropdown__mid > .sub__menu__title {
+    margin-bottom: 1.2rem;
+}
+
+.dropdown__inner > ul:nth-child(2) {
+    margin-left: 3rem;
+}
+
+
+.dropdown__right {
+    padding: 3.6rem 3rem 4.6rem 3rem;
+    margin-left: -3rem;
+    border-left: 0.1rem solid #e6e7e8;
+}
+
+.sub-images {
+    width: 61.2%;
+}
+
+.sub__menu__image-container {
+    width: 40%;
+    padding: 0 0.6rem;
+}
+
+.sub-images img {
+    display: block;
+    width: 20.3rem;
+    aspect-ratio: auto 203 / 274;
+}
+
+.header__search .search__input {
+    display: block;
+    padding: 0.8rem 0.8rem 0.8rem 5.6rem;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-primary);
+    color: #333f48;
+    border: 0.1rem solid #edf1f5;
+    height: 4rem;
+    border-radius: 4em;
+    left: 0;
+}
+
+
+.header__search .search__btn {
+    background-image: url(../images/search-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    width: 1.4117vw;
+    height: 1.4117vw;
+    background-size: 100% 100%;
+    border: none;
+    position: absolute;
+    z-index: 2;
+    left: 1.6rem;
+}
+
+.header__functions {
+    min-width: 16.17vw;
+    gap: 1.2rem;
+}
+
+.function__icon {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+}
+
+.function__icon::before {
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    min-width: 1.4117vw;
+    height: 1.4117vw;
+    display: block;
+}
+
+.icon-store::before {
+    background-image: url(../images/store-icon-before.svg);
+}
+
+.icon-store:hover::before {
+    background-image: url(../images/store-icon-after.svg);
+}
+
+.icon-account::before {
+    background-image: url(../images/user-icon-before.svg);
+}
+
+.icon-account:hover::before {
+    background-image: url(../images/user-icon-after.svg);
+}
+
+.icon-cart::before {
+    background-image: url(../images/cart-icon-before.svg);
+}
+
+.icon-cart:hover::before {
+    background-image: url(../images/cart-icon-after.svg);
+}
+
+.icon-cart {
+    position: relative;
+}
+
+span.cart-item-count {
+    color: white;
+    background: #da291c;
+    font-size: 1rem;
+    width: 1.8rem;
+    line-height: 1.3rem;
+    border-radius: 1.8rem;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 72%;
+}

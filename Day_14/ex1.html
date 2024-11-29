@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+        }
+
+        .menu-item {
+            position: relative;
+            padding: 24px 0;
+        }
+
+        .sub-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 24px);
+            right: 25%;
+        }
+
+        .menu-item:hover .sub-menu{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <ul class="menu">
+        <li class="menu-item">
+            <a href="#">Shop</a>
+            <ul class="sub-menu">
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="#">Shop</a>
+            <ul class="sub-menu">
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="#">Shop</a>
+            <ul class="sub-menu">
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+                <li>Sub</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
