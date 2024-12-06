@@ -17,16 +17,16 @@
         //swap function
         function swap(numbers, a , b) {
             if(numbers[a] > numbers[b]) {
-                a = a + b;
-                b = a - b;
-                a = a - b;
+                numbers[a] = numbers[a] + numbers[b];
+                numbers[b] = numbers[a] - numbers[b];
+                numbers[a] = numbers[a] - numbers[b];
             }
         }
 
         //sort
         swap(numbers, 0, 1);
         swap(numbers, 0, 2);
-        swap(numbers, 2, 3);
+        swap(numbers, 1, 2);
 
         //output
         alert("Sorted order: " + numbers);
