@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //input
+        let a = +prompt("Enter first number: ");
+        let b = +prompt("Enter second number: ");
+        let c = +prompt("Enter third number: ");
+        let numbers = [a, b, c];
+        alert("Origin order: " + numbers);
+
+        //swap function
+        function swap(numbers, a , b) {
+            if(numbers[a] > numbers[b]) {
+                a = a + b;
+                b = a - b;
+                a = a - b;
+            }
+        }
+
+        //sort
+        swap(numbers, 0, 1);
+        swap(numbers, 0, 2);
+        swap(numbers, 2, 3);
+
+        //output
+        alert("Sorted order: " + numbers);
+    </script>
+</body>
+</html>
