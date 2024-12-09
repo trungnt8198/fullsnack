@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="taxCal()">Tax Calculator</button>
+    <button onclick="electricityBillCal()">Electricity Bill Calculator</button>
+    <button onclick="triangleCheck()">Triangle Checker</button>
+    <button onclick="BMICal()">BMI Calculator</button>
+
+    <script>
+        const validNumber = (input) => {
+            return input == input && input > 0;
+        }
+
+        const BMICal = () => {
+            const weight = parseFloat(prompt("Enter weight: "));
+            
+            if(!validNumber(weight)) {
+                alert("Weight must be a number and must be greater than 0");
+                return;
+            }
+
+            const height = parseFloat(prompt("Enter height: "));
+            if(!validNumber(height)) {
+                alert(" Height must be a number and must be greater than 0");
+                return;
+            }
+
+            const BMICalculate = (weight, height) => weight/(height*height);
+            const BMI = BMICalculate(weight, height);
+            alert("BMI score: " + BMI);
+
+            if(BMI < 18.5) {
+                alert("Very thin");
+            }
+            else if (BMI <= 22.9) {
+                alert("Normal");
+            }
+            else if(BMI <= 24.9) {
+                alert("Overweight");
+            }
+            else {
+                alert("Obesity");
+            }
+        };
+
+        const electricityBillCal = () => {
+            const electricityNumber = parseFloat(prompt("Enter your electricity meter number: "));
+
+            if(!validNumber(electricityNumber)) {
+                alert("Electricity meter number must be a number and greater than 0");
+                return;
+            }
+
+            let total = 0;
+            switch(true) {
+                case electricityNumber < 51:
+                    total = electricityNumber * 1678;
+                    break;
+                case electricityNumber < 101:
+                    total = electricityNumber * 1734;
+                    break;
+                case electricityNumber < 201:
+                    total = electricityNumber * 2014;
+                    break;
+                case electricityNumber < 301:
+                    total = electricityNumber * 2536;
+                    break;
+                case electricityNumber < 401:
+                    total = electricityNumber * 2834;
+                    break;
+                default:
+                    total = electricityNumber * 2927;
+            }
+            alert("Total bill: " + total);
+        }
+
+        const triangleCheck = () => {
+            let warning = "Input must be a number and greater than 0";
+
+            const a = parseFloat(prompt("Enter a: "));
+            if(!validNumber(a)) {
+                alert(warning);
+                return;
+            }
+            
+            const b = parseFloat(prompt("Enter b: "));
+            if(!validNumber(b)) {
+                alert(warning)
+                return;
+            }
+
+            const c = parseFloat(prompt("Enter c: "));
+            if(!validNumber(c)) {
+                alert(warning)
+                return;
+            }
+
+            (a + b > c && a + c > b && b + c > a) ? alert ("Triangle") : alert("Not a Triangle"); 
+        }
+
+        const taxCal = () => {
+            const income = parseFloat(prompt("Enter your total income: "));
+            
+            if(!validNumber(income)) {
+               alert("Income must be a number and greater than 0");
+               return;
+            }
+
+            let tax = 0;
+            switch(true) {
+                case income <= 11000000:
+                    alert("No tax applied")
+                    return;
+                case income <= 25000000:
+                    tax = income * 5 / 100;
+                    break;
+                case income <= 50000000:
+                    tax = income * 10 / 100;
+                    break;
+                case income <= 80000000:
+                    tax = income * 20 / 100;
+                    break;
+                default:
+                    tax = income * 30 / 100;
+            }
+            alert("Tax: " + tax);
+        }
+    </script>
+</body>
+</html>

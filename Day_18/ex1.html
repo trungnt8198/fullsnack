@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="countClick()">Click Me</button>
+
+    <script>
+        let count = 0;
+        const countClick = () => console.log(++count);
+
+        // function sum1(a, b) {
+        //     return a + b;
+        // }
+
+        // const sum2 = function (a , b) {
+        //     return a + b;
+        // }
+
+        // const add = (a, b) => {
+        //     console.log(a + b);
+        // }
+
+        // const add2 = (a, b) => console.log(a + b);
+
+        // add(1, 2);
+        // add2(1, 2);
+
+
+
+    const BMICal = () => {
+
+        const weight = parseFloat(prompt("Enter weight: "));
+
+        if(weight !== weight || weight <= 0) {
+            alert("Weight must be a number and must be greater than 0");
+            return;
+        }
+
+        const height = parseFloat(prompt("Enter height: "));
+        if(height !== height || height <= 0) {
+            alert(" Height must be a number and must be greater than 0");
+            return;
+        }
+        
+        const BMICalculate = (weight, height) => weight/(height*height);
+        const BMI = BMICalculate(weight, height);
+        alert("BMI score: " + BMI);
+
+        if(BMI < 18.5) {
+            alert("Very thin");
+        }
+        else if (BMI <= 22.9) {
+            alert("Normal");
+        }
+        else if(BMI <= 24.9) {
+            alert("Overweight");
+        }
+        else {
+            alert("Obesity");
+        }
+    };
+
+    BMICal();
+
+    const isTriangle = () => {
+        const a = parseFloat(prompt("Enter a: "));
+        const b = parseFloat(prompt("Enter b: "));
+        const c = parseFloat(prompt("Enter c: "));
+    }
+    </script>
+</body>
+</html>
