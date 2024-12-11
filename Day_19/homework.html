@@ -17,6 +17,10 @@
             
             for(let a = 1; a <= 10; a++) {
                 for(let b = 1; b <= 10; b++) {
+                    if(b == 10) {
+                        table += `${a} x ${b} = ${a*b}\n`;
+                        break;
+                    }
                     table += `${a} x ${b}  = ${a*b}\n`;
                 }
                 table += "\n\n";
