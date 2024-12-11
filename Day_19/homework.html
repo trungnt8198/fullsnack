@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Day 19</title>
+</head>
+<body>
+    <button onclick="printMultiplicationTable()">Multiplication Table</button>
+    <button onclick="findPerfectSquareNumber()">Perfect Square Number</button>
+
+    <script>
+        const printMultiplicationTable = () => {
+            console.clear();
+
+            table = "Multiplication Table\n\n";
+            
+            for(let a = 1; a <= 10; a++) {
+                for(let b = 1; b <= 10; b++) {
+                    table += `${a} x ${b} = ${a*b}\n`;
+                }
+                table += "\n\n";
+            }
+            console.log(table);
+        }
+
+        const validateInteger = (n) => {
+            if(n !== n) {
+                alert("Input muse be a number");
+                return false;
+            }
+
+            if(n <= 0) {
+                alert("Input must be a number greater than zero");
+                return false;
+            }
+
+            if(!Number.isFinite(n)) {
+                alert("Input must not be an Infinity");
+                return false;
+            }
+
+            if(!Number.isFinite(n*n)) {
+                alert("Input must be a smaller number");
+            }
+            return true;
+        }
+
+        const findPerfectSquareNumber = () => {
+            console.clear();
+
+            let n = parseInt( prompt("Enter n: ") );
+
+            if( !validateInteger(n) ) {
+                return;
+            }
+
+            if(n === 1) {
+                console.log(1);
+                return;
+            }
+
+            let cur = 2;
+
+            while(cur <= n) {
+                console.log(cur * cur);
+                cur++;
+            }
+        }
+    </script>
+</body>
+</html>

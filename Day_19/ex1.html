@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const printTriangle = (n, char) => {
+            temp = char;
+            for(i = 1; i <= n; i++) {
+                console.log(temp);
+                temp += char;  
+            }
+        }
+        // printTriangle(5, "$");
+
+        // let number = parseInt(prompt("Enter number"));
+        // let limit = parseInt(prompt("Enter limit"));
+
+        // const divisibleNumbers = (number, n) => {
+        //     if(n < number) {
+        //         alert("Limit must be equal or greater than number");
+        //         return;
+        //     }
+        //     for(i = number; i <= n; i++ ) {
+        //         if(i % number ==0 0) {
+        //             console.log(i);
+        //         }
+        //     }
+        // }
+
+        // divisibleNumbers(4, 10);
+
+        const isPrime = (n) => {
+            for(let i = 2; i < n; i++) {
+                if( n % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        const primeNumber = (n) => {
+            for(let number = 2; number <= n; number++) {
+                if(isPrime(number)) {
+                    console.log(number);
+                }
+            }
+        }
+
+        const multiplicableTable = () => {
+            for(let a = 1; a <= 10; a++) {
+                for(let b = 1; b <= 10; b++) {
+                    console.log(`${a} x ${b} = ${a*b}`);
+                }
+                console.log("---------");
+            }
+        }
+
+        // multiplicableTable();
+
+        // primeNumber(10);
+
+        const objects = [
+            {fullname: "Coco", age: 22, money: 20_000},
+            {fullname: "Coca", age: 23, money: 1_000_000},
+            {fullname: "Caco", age: 18, money: 200_000},
+            {fullname: "Caca", age: 17, money: 300_000},
+        ];
+        
+        // for (let i = 0; i < objects.length; i++) {
+        //     console.log(objects[i]);
+        // }
+
+        total = 0;
+        for (item of objects) {
+            total += item.money;
+        }
+        console.log(total);
+
+
+        const countWord = (p) => {
+            count = 0;
+            for (c of p) {
+                if(c === ' ') {
+                    count++;
+                }
+            }
+            console.log(++count);
+        }
+
+        const p = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet nisi, non ut aut, exercitationem atque accusamus et necessitatibus sit molestias molestiae hic odio, alias laudantium recusandae perferendis reiciendis. Reiciendis, doloribus?";
+        countWord(p);
+    </script>
+</body>
+</html>
