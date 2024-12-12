@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Show in Console</h1>
+    <script>
+        const students = [
+            { name: 'Nguyen Van A', score: 9 },
+            { name: 'Tran Thi B', score: 7 },
+            { name: 'Le Van C', score: 5 },
+            { name: 'Pham Thi D', score: 3 },
+            { name: 'Doan Van E', score: 10 },
+            { name: 'Hoang Thi F', score: 6 },
+        ];
+
+        const groupStudents = (students) => {
+            const output = {};
+
+            for(student of students) {
+
+                if (!output.highest || student.score > output.highest.score) {
+                    output.highest = student;
+                }
+
+                if (!output.lowest || student.score < output.lowest.score) {
+                    output.lowest = student;
+                }
+
+                if(!output.group) {
+                    output.group = {
+                        A: [],
+                        B: [],
+                        C: [],
+                        D: []
+                    };
+                }
+
+                if (student.score >= 8) {
+                    output.group.A.push(student);
+                } else if (student.score >= 6) {
+                    output.group.B.push(student);
+                } else if (student.score >= 4) {
+                    output.group.C.push(student);
+                } else {
+                    output.group.D.push(student);
+                }
+            } 
+
+            return output;
+
+        }
+
+        const output = groupStudents(students);
+        console.log(output);
+    </script>
+</body>
+</html>

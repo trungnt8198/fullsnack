@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let users = [
+        //     {fullname: "1", age: 20},
+        //     {fullname: "2", age: 21},
+        //     {fullname: "3", age: 22},
+        //     {fullname: "4", age: 23}
+        // ]
+
+        // for(let i = 0; i < Math.floor(users.length/2); i++) {
+        //     let temp = users[i];
+        //     users[i] = users[users.length - 1 - i];
+        //     users[users.length - 1 - i] = temp;
+        // }
+        
+        // const newUsers = [];
+        // for(let i = 0; i < users.length; i++) {
+        //     if(users[i].age > 20) {
+        //         newUsers.push(users[i]);
+        //     }
+        // }
+
+        // console.log(newUsers);
+
+        const users = [
+            { fullname: "Nguyen Van A", age: 20, address: "LangSon" },
+            { fullname: "Nguyen Van B", age: 22, address: "BacGiang" },
+            { fullname: "Nguyen Van C", age: 21, address: "HaNoi" },
+            { fullname: "Nguyen Van D", age: 18, address: "HaNoi" },
+            { fullname: "Nguyen Van E", age: 32, address: "LangSon" },
+        ];
+
+        const groupByAddress = {};
+
+        for(user of users) {
+            if(groupByAddress[user.address]) {
+                groupByAddress[user.address] = [];
+            }
+            groupByAddress[user.address].push(user);
+        }
+        
+        
+        console.log(groupByAddress);
+    </script>
+</body>
+</html>
