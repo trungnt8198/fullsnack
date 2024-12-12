@@ -22,32 +22,17 @@
 
             for(student of students) {
 
-                if (!output.highest || student.score > output.highest.score) {
-                    output.highest = student;
-                }
+                !output.highest || student.score > output.highest.score ? output.highest = student : true;
 
-                if (!output.lowest || student.score < output.lowest.score) {
-                    output.lowest = student;
-                }
+                !output.lowest || student.score < output.lowest.score ? output.lowest = student : true;
 
-                if(!output.group) {
-                    output.group = {
-                        A: [],
-                        B: [],
-                        C: [],
-                        D: []
-                    };
-                }
+                !output.group ? output.group = {} : true;
 
-                if (student.score >= 8) {
-                    output.group.A.push(student);
-                } else if (student.score >= 6) {
-                    output.group.B.push(student);
-                } else if (student.score >= 4) {
-                    output.group.C.push(student);
-                } else {
-                    output.group.D.push(student);
-                }
+                const band = student.score >= 8 ? "A" : 
+                                student.score >= 6 ? "B" :
+                                student.score >= 4 ? "C" : "D"; 
+
+                !output.group[band] ? output.group[band] = [] : output.group[band].push(student);
             } 
 
             return output;
