@@ -26,17 +26,16 @@
 
                 !output.lowest || student.score < output.lowest.score ? output.lowest = student : true;
 
-                !output.group ? output.group = {} : true;
+                !output.group ? output.group = { A: [], B: [], C: [], D: [] } : true;
 
                 const band = student.score >= 8 ? "A" : 
                                 student.score >= 6 ? "B" :
                                 student.score >= 4 ? "C" : "D"; 
 
-                !output.group[band] ? output.group[band] = [] : output.group[band].push(student);
+                output.group[band].push(student);
             } 
 
             return output;
-
         }
 
         const output = groupStudents(students);
