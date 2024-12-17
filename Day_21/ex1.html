@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const userInfo = {
+           email: 'xxxx@gmail.com',
+           age: 23,
+           username: 'xscscsc'
+        }
+
+        const obj = new Object({
+           email: 'xxxx@gmail.com',
+           age: 23,
+           username: 'xscscsc'
+        })
+
+        const arrayInfor = [
+            ["username", "hoangnm"],
+            ["email", "hoang@gmail.com"],
+            ["password", "123456"],
+        ];
+
+        const objectInfo = {};
+        for(item of arrayInfor) {
+            objectInfo[item[0]] = item[1];
+        }
+
+        console.log(objectInfo);
+
+        const user = {
+           email: 'xxxx@gmail.com',
+           age: 23,
+           username: 'xscscsc'
+        }
+
+        const user2 = Object.assign({}, user);
+        user2.additional = "hello";
+
+        console.log(user);
+        console.log(user2);
+
+        //spread
+        user2 = {...user};
+
+        console.log(user);
+        console.log(user2);
+        console.log(user2 === user);
+
+        // const {username, email, age} = user;
+
+        //rest 
+
+        const {username, ...rest} = user;
+
+    </script>
+</body>
+</html>

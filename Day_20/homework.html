@@ -29,13 +29,12 @@
                 !output.group ? output.group = {} : true;
 
                 const band = student.score >= 8 ? "A" : 
-                                student.score >= 6 ? "B" :
-                                student.score >= 4 ? "C" : "D"; 
+                            student.score >= 6 ? "B" :
+                            student.score >= 4 ? "C" : "D"; 
 
                 !output.group[band] ? output.group[band] = [] : true;
                 output.group[band].push(student);
             } 
-
             return output;
         }
 

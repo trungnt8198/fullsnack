@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const data = []
+
+        const isValidInfo = (info) => typeof info === "string" && info != null && info.trim().length != 0;
+
+        const handleRegister = (username, password, email) => {
+
+            if(!isValidInfo(username)) {
+                return "username invalid";
+            }
+
+            if(!isValidInfo(password)) {
+                return "password invalid";
+            }
+
+            if(!isValidInfo(email)) {
+                return "email invalid";
+            }
+
+            data.push({username, password, email, role: "user"});
+            return data;
+        }
+
+        const handleLogin = (email, password) => {
+            let output = { message: "Username or password is incorrect!" };
+            for (let account of data) {
+                if (account.email === email && account.password === password) {
+                    return account;
+                }
+            }
+            return output;
+        };
+
+
+
+        /*Input data
+            account_1:
+                "Nguyen Minh Hoang",
+                "A1b@C3d#E5",
+                "hoangnm@email.com"
+
+            account_2:
+                "Nguyen King Kong",
+                "Z9x!Y7w@V3",
+                "kingkongng@email.com"
+        */
+
+        //Test
+        console.log(handleRegister("Nguyen Minh Hoang", "A1b@C3d#E5", "hoangnm@email.com")); //pass
+        console.log(handleRegister("Nguyen King Kong", "Z9x!Y7w@V3", "kingkongng@email.com")); // pass
+        console.log(handleRegister("valid_username", "valid_password" , "valid_email")); //pass
+
+        console.log(handleRegister("", "valid_password" , "valid_email"));//fail
+        console.log(handleRegister(null, "valid_password" , "valid_email"));//fail
+        console.log(handleRegister({obj: "this is not valid"}, "valid_password" , "valid_email")); //fail
+        console.log(handleRegister("valid_username", ["", 1, 2, {obj: "this is not valid"}] , "valid_email")); //fail
+        console.log(handleRegister("valid_username", "valid_password" , 1 === 1 && 2 == "This is not valid")); //fail
+
+        console.log("data", data);
+
+        console.log("dataLogin", handleLogin("hoangnm@email.com", "A1b@C3d#E5")); // pass
+        console.log("dataLogin", handleLogin("kingkongng@email.com", "Z9x!Y7w@V3")); // pass
+
+        console.log("dataLogin", handleLogin("hoangnm@email1.com", "A1b@C3d#E5")); // fail
+        console.log("dataLogin", handleLogin("1kingkong@email.com", "Z9x!Y7w@V3")); // fail
+        console.log("dataLogin", handleLogin("NotRegisteredYet", "Z9x!Y7w@V3")); // fail
+    </script>
+</body>
+</html>
