@@ -9,7 +9,7 @@
     <script>
         const data = []
 
-        const isValidInfo = (info) => typeof info === "string" && info != null && info.trim().length < 6;
+        const isValidInfo = (info) => typeof info === "string" && info != null && info.trim().length >= 6;
 
         const handleRegister = (username, password, email) => {
 
