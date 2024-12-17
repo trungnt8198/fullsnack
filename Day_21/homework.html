@@ -9,20 +9,20 @@
     <script>
         const data = []
 
-        const isValidInfo = (info) => typeof info === "string" && info != null && info.trim().length != 0;
+        const isValidInfo = (info) => typeof info === "string" && info != null && info.trim().length < 6;
 
         const handleRegister = (username, password, email) => {
 
             if(!isValidInfo(username)) {
-                return "username invalid";
+                return "username invalid or length < 6";
             }
 
             if(!isValidInfo(password)) {
-                return "password invalid";
+                return "password invalid or length < 6";
             }
 
             if(!isValidInfo(email)) {
-                return "email invalid";
+                return "email invalid or length < 6";
             }
 
             data.push({username, password, email, role: "user"});
