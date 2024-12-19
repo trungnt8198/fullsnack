@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // const food = ["burger", "fried chicken", "cucumber", "bread", "milk"];
+        // console.log(food.slice(-1, 0));
+
+        const myArr = ["Hoang", 0, null, "F8", "Hoc lap trinh", 100, undefined];
+
+        for (let i = 0; i < myArr.length; i++) { 
+            if(!myArr[i]) {
+                myArr.splice(i, 1);
+                i--;
+            }
+        }
+
+        console.log(myArr);
+
+        const products = [
+            {id: 1, title: "Product A", price: 200, quantity: 2, discount: 0.1},
+            {id: 2, title: "Product B", price: 200, quantity: 2, discount: 0.2},
+            {id: 3, title: "Product C", price: 300, quantity: 2, discount: 0.3},
+            {id: 4, title: "Product D", price: 400, quantity: 2, discount: 0.05},
+        ]
+
+        const hotSalesProduct = products.filter(p => p.discount >= 0.2);
+        
+        let sum = 0;
+        products.forEach(p => {
+            sum += p.price * p.quantity * (1 - p.discount);
+        })
+
+        console.log(sum);
+
+        const productNames = products.map(p => p.title);
+        const newProducts = products.map((p) => ({...p, amount: p.price * p.quantity * (1 - p.discount)}));
+        console.log(productNames);
+
+
+        const arr1 = [1, 2, 3, 4, [100, 200]];
+
+        const [first, second, ...rest] = arr1;
+        console.log(first);
+        console.log(second);
+        console.log(rest);
+
+        const arr2 = [10, 11, 12];
+        const arr3 = [...arr1, ...arr2];
+        console.log(arr3);
+
+        const arr1Copy = [...arr1];
+        console.log(arr1Copy);
+        console.log(arr1Copy === arr1);
+        console.log(arr1Copy[4][0]);
+        arr1Copy[4][0] = 1000;
+        console.log(arr1Copy);
+        console.log(arr1)
+
+
+        let str = [1, 2, 3];
+        let str2 = [4, 5, 6, [7, 8]];
+
+        let str3 = str.concat(str2);
+        str2[3][1] = 100;
+
+        str2Clone = structuredClone(str2);
+
+        console.log(str2);
+        console.log(str3);
+        console.log(str2Clone === str2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Product List Exercise </h1>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "Apple iPhone 12",
+                price: 1000,
+            },
+            {
+                id: 2,
+                name: "Samsung Galaxy S21",
+                price: 900,
+            },
+            {
+                id: 3,
+                name: "Xiaomi Mi 11",
+                price: 800,
+            },
+            {
+                id: 4,
+                name: "Apple iPhone 11",
+                price: 700,
+            },
+            {
+                id: 5,
+                name: "Samsung Galaxy S20",
+                price: 600,
+            },
+            {
+                id: 6,
+                name: "Xiaomi Mi 10",
+                price: 500,
+            },
+        ];
+
+        const getTopProducts = (products, size) => {
+            let copyProducts = structuredClone(products);
+            let output = [];
+            while(size > 0) {
+                let max = 0;
+                let maxPriceProduct = {};
+                copyProducts.forEach(p => {
+                    if(p.price > max) {
+                        max = p.price;
+                        maxPriceProduct = {...p};
+                    }
+                });
+                output.push(maxPriceProduct);
+                copyProducts = copyProducts.slice(1, products.length);
+                size--;
+            }
+            return output;
+        }
+
+        let result = getTopProducts(products, 3);
+        console.log(result);
+    </script>
+</body>
+</html>
