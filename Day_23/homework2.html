@@ -45,13 +45,16 @@
         const getTopProducts = (products, size) => {
             let copyProducts = structuredClone(products);
             let output = [];
+            if(size >= products.length) {
+                return copyProducts;
+            }
             while(size > 0) {
                 let max = 0;
                 let maxPriceProduct = {};
                 copyProducts.forEach(p => {
                     if(p.price > max) {
                         max = p.price;
-                        maxPriceProduct = {...p};
+                        maxPriceProduct = p;
                     }
                 });
                 output.push(maxPriceProduct);
