@@ -60,24 +60,25 @@
         ];
         
         const flattenCategories = (categories) => {
+            if(categories.length === 0) return categories;
             return flattenCategory(categories, 0);
         }
 
         const flattenCategory = (category, level) => {
-            let output = [];
-            category.forEach(c => {
-                const {id, name, children} = c;
-                output.push({id, name, level: level});
+            return category.reduce((acc, cur) => {
+                const {id, name, children} = cur;
+                acc = [...acc, {id, name, level: level}];
                 if(children) {
-                    output = [...output, ...flattenCategory(children, ++level)];
+                    acc = [...acc, ...flattenCategory(children, level+1)];
                 }
-            });
-            return output;
+                return acc;
+            }, []);
         }
         
         console.log(flattenCategories(categories));
 
         const getCategoryName = (categories, categoryId) => {
+            if(categories.length === 0) return null;
             let filtered = flattenCategories(categories).find(c => c.id === categoryId);
             return filtered ? filtered.name : null;
         }

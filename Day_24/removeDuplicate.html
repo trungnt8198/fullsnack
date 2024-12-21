@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const fruits = ["apple", "banana", "kiwi", "kiwi", "banana", "orange", "apple", "kiwi"];
+
+        function removeDuplicate(arr) {
+            if(arr.length <= 1)  return arr;
+            
+            return arr.reduce((acc, cur) => acc.indexOf(cur) >= 0 ? acc : [...acc, cur], []); 
+        }
+
+        console.log(removeDuplicate(fruits));
+    </script>
+</body>
+</html>

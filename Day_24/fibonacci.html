@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const isValidInput = n => n === n && n > 0 && isFinite(n);
+
+        const fibonacci = (n) => {
+            if(!isValidInput(n)) return "Invalid Input";
+            if(n === 1) return "0";
+
+            const arr = new Array(n).fill(0).reduce((acc, cur, curIndex) => {
+                if(curIndex === 0)
+                    acc.push(0);
+                else if(curIndex === 1)
+                    acc.push(1);
+                else {
+                    acc.push(acc[curIndex - 1] + acc[curIndex - 2]);
+                }
+                return acc;
+            }, []);
+            return arr.join(" "); 
+        }
+
+        const n = parseInt(prompt("Enter number: "));
+        console.log(fibonacci(n));
+    </script>
+</body>
+</html>

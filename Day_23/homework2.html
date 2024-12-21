@@ -43,11 +43,13 @@
         ];
 
         const getTopProducts = (products, size) => {
+            if(products.length <= 1) return products;
+            if(size < 0 || size > products.length) {
+                return "Invalid size";
+            }
+
             let copyProducts = structuredClone(products);
             let output = [];
-            if(size >= products.length) {
-                return copyProducts;
-            }
             while(size > 0) {
                 let max = 0;
                 let maxPriceProduct = {};
@@ -64,7 +66,7 @@
             return output;
         }
 
-        let result = getTopProducts(products, 3);
+        let result = getTopProducts(products, 6);
         console.log(result);
     </script>
 </body>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const students = [
+            { id: 1, fullName: "Nguyen Manh Huy", age: 18 },
+            { id: 2, fullName: "Nguyen Anh Hoang", age: 10 },
+            { id: 2, fullName: "Nguyen Minh Hoang", age: 10 },
+            { id: 3, fullName: "Vu Huy Do", age: 21 },
+            { id: 4, fullName: "Dang Nhat Minh", age: 22 },
+            { id: 4, fullName: "Nhung", age: 22 },
+            { id: 4, fullName: "Nguyen Hoang Minh Khang", age: 22 },
+        ];
+
+        /*
+            sắp xếp danh sách học viên theo tên dựa vào bảng alphabet
+            nếu trùng tên thì sắp xếp theo họ và tên đệm
+        */
+
+        const sortStudent = (students) => {
+            students.sort((a, b) => {
+                arr1 = a.fullName.split(" ");
+                arr2 = b.fullName.split(" ");
+
+                aLastName = arr1.pop();
+                bLastName = arr2.pop();
+
+                if(aLastName > bLastName) return 1;
+                if(aLastName < bLastName) return -1;
+    
+                aFirstMiddle = arr1.join(" ");
+                bFirstMiddle = arr2.join(" ");
+
+                if(aFirstMiddle > bFirstMiddle)
+                    return 1;
+                if(aFirstMiddle < bFirstMiddle)
+                    return -1;
+            });
+        }
+
+        sortStudent(students);
+        console.log(students);
+
+        console.log("Do" > "Hoang");
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "SP1",
+                price: 1000,
+            },
+            {
+                id: 2,
+                name: "SP2",
+                price: 900,
+            },
+            {
+                id: 3,
+                name: "SP3",
+                price: 800,
+            },
+            {
+                id: 4,
+                name: "SP4",
+                price: 700,
+            },
+            {
+                id: 5,
+                name: "SP5",
+                price: 600,
+            },
+            {
+                id: 6,
+                name: "SP6",
+                price: 500,
+            },
+        ];
+
+        const sortProduct = (data, valueSelect) => {
+            switch(valueSelect) {
+                case 1: 
+                    products.sort((a, b) => {
+                        a.name < b.name ? -1 : 1;
+                    });
+                    break;
+                case 2: 
+                    products.sort((a, b) => {
+                       a.name > b.name ? 1 : 1;
+                    });
+                    break;
+                case 3: 
+                    products.sort((a, b) => a.price - a.price);
+                    break;
+                case 4: 
+                    products.sort((a, b) => a.price - a.price);
+                    break;
+            }
+        }
+        sortProduct(products, 0);
+        console.log(products);
+    </script>
+</body>
+</html>
