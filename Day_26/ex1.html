@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let f8Slogan = "F8 - Hoc hoc hoc lap trinh de di lam";
+        let output = "";
+        for (index in f8Slogan) {
+            output += f8Slogan[f8Slogan.length - 1 - index];
+        }
+        console.log(output);
+
+        const isPalindrome = (s) => {
+            for(let i = 0; i < s.length / 2; i++) {
+                if(s[i] !== s[s.length - 1 - i])
+                    return false;
+            }
+            return true;
+        }
+
+        console.log(isPalindrome("abba"));
+        console.log(isPalindrome("abcba"));
+
+        // const countKeyWord = (s, keyword) => {
+        //     let output = 0;
+        //     for(let i = 0; i < s.length - keyword.length; i++) {
+        //         if(s.substring(i, i + keyword.length).toLowerCase() === keyword.toLowerCase()) {
+        //             output++;
+        //         }
+        //     }
+        //     return output;
+        // }
+
+        const countKeyWord = (s, keyword) => {
+            let output = 0;
+            let STR = s.toUpperCase();
+            let KEYWORD = keyword.toUpperCase();
+
+            for (let i = 0; i < s.length;) {
+                let current = STR.indexOf(KEYWORD, i);
+                if (current === -1) {
+                    break;
+                } 
+                output++;
+                i = current + keyword.length;
+            }
+            return output;
+        }
+
+
+        f8Slogan = "F8 - Hoc hochoc hochoc lap trinh de di lam";
+        console.log(countKeyWord(f8Slogan, "Hoc"));
+        
+    </script>
+</body>
+</html>

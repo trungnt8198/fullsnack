@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const jsContent = `Năm 1995:JavaScript được tạo ra bởi Brendan Eich chỉ trong khoảng 10 ngày khi ông làm việc tại Netscape. Tên ban đầu của Javascript là Mocha, sau đó được đổi tên thành LiveScript.
+Năm 1996:Javascript được gửi đến ECMA(European Computer Manufacturers Association - Hội liên hiệp các nhà sản xuất máy tính Châu Âu)để chuẩn hóa và đổi tên thành JavaScript.
+Năm 2009: ECMAScript 5 ra đời với nhiều cải tiến quan trọng như có thêm nhiều phương thức mới cho mảng và đối tượng và tính năng "strict mode". Cũng trong năm 2009 Ryan Dahl đã tạo ra Node.js, một nền tảng cho phép chạy javaScript ngoài trình duyệt. Điều này đã mở ra một cánh cửa mới cho JavaScript.
+Năm 2015:ECMAScript 6 (ES6) ra đời,là phiên bản lớn nhất của ECMAScript với nhiều cải tiến và tính năng được coi là vượt bậc.
+Năm 2016 - nay:Các phiên bản ECMAScript mới được ra mắt liên tục,với nhiều cải tiến và tính năng mới.Cho đến nay javaScript đã trở thành một trong số những ngôn ngữ được ưa chuộng và sử dụng nhiều nhất thế giới.`;
+
+        const validateInputs = (content, keyword) => {
+            if(content === undefined || keyword === undefined) {
+                return "Content and Keyword must not be undefined";
+            }
+            if(typeof content !== "string") {
+                return `${typeof content} ${content} is not a string`;
+            }
+            if(typeof keyword !== "string") {
+                return `${typeof keyword} ${keyword} is not a string`;            
+            }
+            if(content.trim().length === 0) {
+                return "Content must not be empty";
+            }
+            if(keyword.trim().length === 0) {
+                return "Keyword must not be empty";
+            }
+            if(keyword.length > content.length) {
+                return "Keyword length must be smaller than Content length";
+            }
+            return "Valid";
+        }
+
+        const printHighlight = ((content, keyword) => {
+            let validateResult = validateInputs(content, keyword);
+            if(validateResult !== "Valid") {
+                console.log(validateResult);
+                return;
+            }
+            const keywords = new Set(content.match(new RegExp(keyword, "gi")));
+            keywords.forEach(cur => content = content.replaceAll(cur, `<b>${cur}</b>`));
+            console.log(content);
+            return content;
+        });
+        
+        const fixContent = (content) => {
+            const punctuationMarks = [".", ",", ";", ":", "!", "?"];
+            const parentheses = ["()", "[]", "{}" ,"<>"];
+            punctuationMarks.forEach(cur => content = content.replaceAll(new RegExp(`\\${cur}(?!\\s)`, "g"), cur + " "));
+            parentheses.forEach((cur) => {
+                content = content.replaceAll(new RegExp(`(?<!\\s)\\${cur[0]}`, "g"), " " + cur[0]);
+                content = content.replaceAll(new RegExp(`\\${cur[1]}(?!\\s)`, "g"), cur[1] + " ");
+            });
+            console.log(content);
+            return content;
+        }
+
+        const highlightedContent = printHighlight(jsContent, "javascript");
+        fixContent(highlightedContent);
+    </script>
+</body>
+</html>
