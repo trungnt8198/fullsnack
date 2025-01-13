@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="countdown"></div>
+
+    <script>
+        const div = document.getElementById("countdown");
+
+        const writeTimes = (interval, div) => {
+            const TetHoliday = new Date(2026, 0, 1).getTime();
+
+            if(Date.now() >= TetHoliday) {
+                clearInterval(interval);
+                document.write("Chúc Mừng Năm Mới 2026 !!!");
+                return;
+            }
+
+            const timestamp = TetHoliday - Date.now();
+            let days = timestamp / (1000 * 60 * 60 * 24);
+            let hours = (days - parseInt(days)) * 24;
+            let minutes = (hours - parseInt(hours)) * 60;
+            let seconds = (minutes - parseInt(minutes)) * 60;
+
+            days = parseInt(days);
+            hours = parseInt(hours);
+            minutes = parseInt(minutes);
+            seconds = parseInt(seconds);
+            
+            div.innerHTML = `Còn ${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây là đến tết 2026`;
+        }
+
+        const TetCountDown = setInterval(() => writeTimes(TetCountDown, div), 1000);
+    </script>
+</body>
+</html>

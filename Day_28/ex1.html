@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [1, 2, 3, 4, 5];
+        const log = (n, arr) => {
+            if(n === arr.length) 
+                return;
+            console.log(arr[n++]);
+            const myTimeOut = setTimeout(function () { 
+                log(n,arr);
+                clearTimeout(myTimeOut);
+            }, 1000);
+        }
+
+        log(0, arr);
+
+    </script>
+</body>
+</html>
