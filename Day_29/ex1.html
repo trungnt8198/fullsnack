@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <h2 id="title-1">DOM la gi ?</h2>
+    </section>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, incidunt!</p>
+    <div>
+        <div>
+            <div>
+                <p id="example" class="example-class">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolore temporibus numquam earum non sequi ea cumque aut minus tenetur?</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const plorem20 = document.querySelector("div>div>div>p");
+        const plorem21 = document.getElementById("example");
+        const plorem22 = document.getElementsByClassName("example-class");
+        const plorem23 = document.querySelector(".example-class");
+        const plorem24 = document.querySelector("#example");
+        console.log(plorem20);
+        console.log(plorem21);
+        console.log(plorem22[0]);
+        console.log(plorem23);
+        console.log(plorem24);
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { validateItems } from "./common.js";
+        
+        const cart = [
+            {
+                id: 1,
+                name: 'T-Shirt',
+                price: 100000,
+                quantity: 2,
+                hotSale: false
+            },
+            {
+                id: 2,
+                name: 'Jean',
+                price: 200000,
+                quantity: 1,
+                hotSale: false
+            },
+            {
+                id: 3,
+                name: 'Skirt',
+                price: 150000,
+                quantity: 3,
+                hotSale: true
+            },
+            {
+                id: 4,
+                name: 'Shirt',
+                price: 120000,
+                quantity: 2,
+                hotSale: false
+            },
+            {
+                id: 5,
+                name: 'Jacket',
+                price: 250000,
+                quantity: 1,
+                hotSale: true
+            }
+        ];
+
+        const renderOrder = (cart) => {
+            const requiredKeys = ["name", "price", "quantity", "hotSale"];
+            const validateResult = validateItems(cart, requiredKeys);
+            if(validateResult != "Valid") {
+                document.body.innerText = validateResult;
+                return;
+            }
+            const {tbody, total} = getTableBodyAndTotal(cart);
+            const table = getTableTemplate(tbody, total);
+            document.body.innerHTML = table;
+            decorateTable();
+        }
+
+
+        const getTableTemplate = (tbody, total) => {
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tbody}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                        <td colspan="3">Tổng tiền</td>
+                        <td>${total}</td>
+                        </tr>
+                    </tfoot>
+                </table>`;
+        }
+
+        const getTableBodyAndTotal = (cart) => {
+            let tbody = "";
+            let total = 0;
+            cart.forEach(item => {
+                tbody += `
+                <tr${item.hotSale ? " style='color: red'" : ""}>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.quantity * item.price}</td>
+                </tr>`;
+                total += item.quantity * item.price;
+            });
+            return {tbody, total};
+        }
+
+        const decorateTable = () => {
+            const borderStyle = "1px solid green";
+            const table = document.querySelector("table");
+            table.style.width = "100%";
+            table.style.textAlign = "center";
+            table.style.border = borderStyle;
+            table.style.borderCollapse = "collapse";
+            Array.from(table.getElementsByTagName("th")).forEach(td => {
+                td.style.border = borderStyle;
+            });
+            Array.from(table.getElementsByTagName("td")).forEach(td => {
+                td.style.border = borderStyle;
+            });
+        }
+
+        renderOrder(cart);
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { validateItems } from "./common.js";
+
+        const menu = [
+            {
+                id: 1,
+                name: 'Home',
+                parentId: 0
+            },
+            {
+                id: 2,
+                name: 'About',
+                parentId: 0
+            },
+            {
+                id: 3,
+                name: 'News',
+                parentId: 0
+            },
+            {
+                id: 4,
+                name: 'Products',
+                parentId: 0
+            },
+            {
+                id: 5,
+                name: 'Contact',
+                parentId: 0
+            },
+            {
+                id: 6,
+                name: 'T-Shirt',
+                parentId: 4
+            },
+            {
+                id: 7,
+                name: 'Jean',
+                parentId: 4
+            },
+            {
+                id: 8,
+                name: 'Skirt',
+                parentId: 4
+            }
+        ];
+
+        const buildMenu = (menu) => {
+            const requiredKeys = ["id", "name", "parentId"];
+            const validateResult = validateItems(menu, requiredKeys);
+            if(validateResult != "Valid") {
+                document.body.innerText = validateResult;
+                return;
+            }
+
+            const parentMenu = document.createElement("ul");
+            document.body.appendChild(parentMenu);
+            parentMenu.setAttribute("id", "main-menu");
+
+            menu.forEach(item => {
+                const li = document.createElement("li");
+                li.setAttribute("id", String(item.id));
+                const link = document.createElement("a");
+                link.setAttribute("href", "#");
+                link.innerText = item.name;
+                li.appendChild(link)
+                
+                if(item.parentId === 0) {
+                    link.style.fontSize = "24px";
+                    parentMenu.appendChild(li);
+                }
+                else {
+                    const parent = document.getElementById(String(item.parentId));
+                    let subMenu = parent.querySelector("ul");
+                    if(!subMenu) {
+                        subMenu = document.createElement("ul");
+                        parent.appendChild(subMenu);
+                    }
+                    link.style.fontSize = "20px";
+                    subMenu.appendChild(li);
+                }
+            });
+            const lis = document.getElementsByTagName("li");
+            for(const li of lis) {
+                li.removeAttribute("id");
+            }
+        }
+
+        buildMenu(menu);
+    </script>
+</body>
+</html>

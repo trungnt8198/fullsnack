@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol></ol>
+    <script>
+        const users = [
+            {id: 1, name: "Hoang"},
+            {id: 3, name: "Thang"},
+            {id: 2, name: "Dung"}
+        ]
+
+        const products = [
+            { id: 1, title: "Samsung Galaxy 19", price: 2000, quantity: 2 },
+            { id: 2, title: "Oppo corolla X", price: 1200, quantity: 1 },
+            { id: 3, title: "Iphone 16 pro max", price: 2100, quantity: 3 },
+        ];
+
+        users.sort((a, b) => a.id - b.id);
+
+        let ol = document.createElement("ol");
+        users.forEach(u => {
+            const li = document.createElement("li");
+            li.innerText = u.name;
+            ol.appendChild(li);
+        });
+        document.body.append(ol);
+
+
+        const productsTable = document.createElement("table");
+        const thead = document.createElement("thead");
+        const headRow = document.createElement("tr");
+        const headId = document.createElement("td");
+        headId.innerText = "ID";
+        const productName = document.createElement("td");
+        productName.innerText = "Product Name";
+        const productQuantity = document.createElement("td");
+        productQuantity.innerText = "Quantity";
+        const price = document.createElement("td");
+        price.innerText = "Price";
+
+        const tbody = document.createElement("tbody");
+
+        let total = 0;
+        products.forEach(u => {
+            total += (u.price * u.quantity);
+            const tr = document.createElement("tr");
+            const id = document.createElement("td");
+            id.innerText = u.id;
+            const productName = document.createElement("td");
+            productName.innerText = u.title;
+            const productPrice = document.createElement("td");
+            productPrice.innerText = u.price;
+            const productQuantity = document.createElement("td");
+            productQuantity.innerText = u.quantity;
+            tr.appendChild(id);
+            tr.appendChild(productName);
+            tr.appendChild(productQuantity);
+            tr.appendChild(productPrice);
+            tbody.append(tr);
+        })
+
+        const RowTotal = document.createElement("tr");
+        const RowTotal1 = document.createElement("td");
+        RowTotal1.innerText = "Total";
+        const RowTotal2 = document.createElement("td");
+        const RowTotal3 = document.createElement("td");
+        const RowTotal4 = document.createElement("td");
+        RowTotal4.innerText = total;
+
+        RowTotal.appendChild(RowTotal1);
+        RowTotal.appendChild(RowTotal2);
+        RowTotal.appendChild(RowTotal3);
+        RowTotal.appendChild(RowTotal4);
+        tbody.appendChild(RowTotal);
+
+        productsTable.appendChild(thead);
+        productsTable.appendChild(tbody);
+        thead.appendChild(headRow);
+        headRow.appendChild(headId);
+        headRow.appendChild(productName);
+        headRow.appendChild(productQuantity);
+        headRow.appendChild(price);
+
+        document.body.append(productsTable);
+    </script>
+</body>
+</html>
