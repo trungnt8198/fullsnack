@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul></ul>
+        </nav>
+    </header>
+    <script>
+        const dataMenu = [
+            { id: 1, name: "Trang chủ", slug: "/"},
+            { id: 2, name: "Sản phẩm", slug: "/san-pham"},
+            { id: 3, name: "Về chúng tôi", slug: "/ve-chung-toi"},
+            { id: 4, name: "Phụ kiện 1", slug: "/phu-kien-1", parentId: 2 },
+            { id: 5, name: "Phụ kiện 2", slug: "/phu-kien-2", parentId: 4 }
+        ];
+
+        const map = dataMenu.reduce((acc, obj) => {
+                acc[obj.parentId] = acc[obj.parentId] || [];
+                acc[obj.parentId].push(obj);
+            return acc;
+        }, {});
+
+
+        const buildMenu = (menuMap, parentId, slug = "") => {
+            const children = menuMap[parentId];
+            if(!children) return "";
+            let ul = "<ul>";
+            for(item of children) {
+                let li = `<li><a href="${slug + item.slug}">${item.name}</a>`;
+                li += buildMenu(menuMap, item.id, slug + item.slug);
+                li += "</li>";
+                ul += li;
+            }
+            ul += "</ul>";
+            return ul;
+        };
+
+       document.body.innerHTML = buildMenu(map);
+    </script>
+</body>
+</html>

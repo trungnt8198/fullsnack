@@ -1,0 +1,218 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: #ccc;
+            }
+
+            .container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                width: 800px;
+                padding: 30px;
+                border-radius: 5px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            .calculator {
+                margin-top: 30px;
+                display: flex;
+                justify-content: space-between;
+
+                label {
+                    cursor: pointer;
+                }
+
+                input {
+                    cursor: pointer;
+                }
+            }
+
+            .inputs-group {
+                width: 80%;
+            }
+
+            .inputs {
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+
+                label {
+                    width: 30%;
+                }
+
+                input {
+                    width: 70%;
+                    padding: 8px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                }
+
+                input[name="result"] {
+                    background-color: #ccc;
+                    outline: none;
+                    color: black
+                }
+            }
+
+            .functions-group {
+                padding-left: 20px;
+            }
+
+            .operators {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 10px;
+                width: 70%;
+                margin-bottom: 20px;
+            }
+
+            .operator {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 60px;
+
+                label {
+                    padding-right: 5px;
+                }
+            }
+
+            button {
+                width: 100%;
+                padding: 8px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: white;
+                color: #007bff;
+                outline: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Bé Tập Tính Website</h1>
+            <div class="calculator">
+                <div class="inputs-group">
+                    <div class="inputs">
+                        <label for="num1">Nhập số thứ nhất</label>
+                        <input type="text" name="num1" id="num1">
+                    </div>
+                    <div class="inputs">
+                        <label for="num2">Nhập số thứ hai</label>
+                        <input type="text" name="num2" id="num2">
+                    </div>
+                    <div class="inputs">
+                        <label for="result">Kết quả</label>
+                        <input type="text" name="result" id="result" readonly="">
+                    </div>
+                </div>
+                <div class="functions-group">
+                    <div class="operators">
+                        <div class="operator">
+                            <label for="add">Cộng</label>
+                            <input type="radio" name="operator" id="add" value="add">
+                        </div>
+                        <div class="operator">
+                            <label for="substract">Trừ</label>
+                            <input type="radio" name="operator" id="substract" value="substract">
+                        </div>
+                        <div class="operator">   
+                            <label for="multiply">Nhân</label>
+                            <input type="radio" name="operator" id="multiply" value="multiply">
+                        </div>
+                        <div class="operator">
+                            <label for="divide">Chia</label>
+                            <input type="radio" name="operator" id="divide" value="divide">
+                        </div>
+                    </div>
+                    <button type="button" onclick="calculate()">Tính</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const num1 = document.getElementById('num1');
+            const num2 = document.getElementById('num2');
+            const result = document.getElementById('result');
+
+            const validateInput = () => {
+                if (num1.value === "" || num2.value === "") {
+                    alert('Vui lòng nhập đủ 2 số');
+                    return false;
+                }
+
+                if(num1.value.includes(" ") || num2.value.includes(" ")) {
+                    alert('Vui lòng nhập số không chứa khoảng trắng');
+                    return false;
+                }
+
+                if (isNaN(num1.value) || isNaN(num2.value)) {
+                    alert('Vui lòng nhập số');
+                    return false;
+                }
+
+                const selectedOperator =  document.querySelector('input[name="operator"]:checked');
+                if (!selectedOperator) {
+                    alert('Vui lòng chọn phép tính');
+                    return false;
+                }
+                
+                if(selectedOperator.value === 'divide' && parseFloat(num2.value) === 0) {
+                    alert('Phép tính không hợp lệ: Không thể chia cho 0');
+                    return false;
+                }
+                return true;
+            }
+
+            const calculate = () => {
+                if(!validateInput()) {
+                    return;
+                }
+
+                const operator =  document.querySelector('input[name="operator"]:checked').value;
+                let output = 0;
+                switch(operator) {
+                    case 'add':
+                        output = parseFloat(num1.value) + parseFloat(num2.value);
+                        break;
+                    case 'substract':
+                        output = parseFloat(num1.value) - parseFloat(num2.value);
+                        break;
+                    case 'multiply':
+                        output = parseFloat(num1.value) * parseFloat(num2.value);
+                        break;
+                    case 'divide':
+                        output = parseFloat(num1.value) / parseFloat(num2.value);
+                        break;
+                    default:
+                        output = "Error";
+                }
+                result.value = output;
+            }
+        </script>
+    </body>
+</html>

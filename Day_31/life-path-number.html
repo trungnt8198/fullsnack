@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        .container {
+            width: 800px;
+            min-height: 250px;
+            padding: 20px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: limegreen;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 2px solid blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ứng dụng Thần Số Học</h1>
+        <div>
+            <label for="dob">Nhập ngày sinh của bạn:</label>
+            <input type="date" name="dob" id="dob" required>
+            <button type="button" onclick="getLifePathNumber()">Tính số chủ đạo</button>
+        </div>
+        <div>
+            <p id="notification"></p>
+            <p id="number-description"></p>
+        </div>
+    </div>
+    <script>
+        const descriptions = {
+            1: "Bạn là người độc lập, mạnh mẽ và có khả năng lãnh đạo. Bạn có tư duy sáng tạo và luôn tìm cách đạt được mục tiêu của mình.",
+            2: "Bạn là người hòa đồng, nhạy bén và biết lắng nghe. Bạn rất giỏi trong việc xây dựng mối quan hệ và hợp tác.",
+            3: "Bạn sáng tạo, lạc quan và luôn tràn đầy năng lượng. Bạn có khả năng giao tiếp tốt và dễ dàng làm quen với mọi người.",
+            4: "Bạn là người thực tế, có tổ chức và làm việc chăm chỉ. Bạn có khả năng xây dựng nền tảng vững chắc trong công việc và cuộc sống.",
+            5: "Bạn thích tự do, thích khám phá và là người thích mạo hiểm. Bạn có thể đối mặt với thử thách và luôn tìm kiếm sự thay đổi.",
+            6: "Bạn quan tâm đến gia đình, yêu thương và chăm sóc người khác. Bạn là người sống trách nhiệm và luôn quan tâm đến những người thân yêu.",
+            7: "Bạn là người thích suy ngẫm, nghiên cứu và khám phá. Bạn có khả năng phân tích và thích sự yên tĩnh.",
+            8: "Bạn là người kiên trì, có tham vọng và luôn nỗ lực hết mình. Bạn có sức mạnh và khả năng lãnh đạo trong mọi lĩnh vực.",
+            9: "Bạn là người có tấm lòng nhân ái, giúp đỡ và quan tâm đến người khác. Bạn có tính cách giàu tình cảm và thích giúp đỡ cộng đồng.",
+        };
+
+        const dob = document.getElementById("dob");
+        const noti = document.getElementById("notification");
+        const numberDescription = document.getElementById("number-description");
+
+        const getLifePathNumber = () => {
+            if(dob.value === "") {
+                alert("Vui lòng nhập ngày sinh của bạn !");
+                return;
+            }
+
+            const dobNumber = parseInt(dob.value.split("-").join(""));
+            const lifePathNumber = calculateLifePathNumber(dobNumber);
+            
+            noti.innerHTML = `<strong>Số chủ đạo của bạn là: ${lifePathNumber}</strong>`;
+            numberDescription.innerText = descriptions[lifePathNumber];
+        }
+
+        const calculateLifePathNumber = (number) => {
+            let temp = 0;
+            do {
+                while(number > 0) {
+                    temp += (number % 10);
+                    number = parseInt(number / 10);
+                }
+                number = temp;
+                temp = 0;
+            }
+            while(String(number).length > 1);
+            return number;
+        }
+    </script>
+</body>
+</html>

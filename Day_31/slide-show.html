@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+
+        .container {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding-bottom: 40px;
+        }
+
+        #slide-show {
+            width: 800px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            transition: all ease-in-out 0.5s;
+            user-select: none;
+        }
+
+        #slide-show:hover .slide-show__btn {
+            display: block;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #slide-title {
+            user-select: none;
+        }
+
+        .slide-show__btn {
+            display: none;
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background-color: #000;
+            opacity: 0.6;
+            top: 50%;
+            font-size: 18px;
+            text-align: center;
+            color: white;
+            line-height: 35px;
+            cursor: pointer;
+            z-index: 9999;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        #slides {
+            display: flex;
+            transition: transform ease-in-out 0.6s;
+        }
+
+        #prev {
+            left: 10px;
+        }
+
+        #next {
+            right: 10px;
+        }
+
+        #dots {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .active {
+            background-color: #333;
+        }
+
+        img {
+            display: inline-block;
+            line-height: 0;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="slide-show">
+            <ul id="slides"></ul>
+            <button class="slide-show__btn" id="prev" type="button" onclick="showPreviousSlide()">&lt;</button>
+            <button class="slide-show__btn" id="next" type="button" onclick="showNextSlide()">&gt;</button>
+        </div>
+        <h2 id="slide-title"></h2>
+        <ul id="dots"></ul>
+    </div>
+    <script>
+        const slidesData = [
+            {
+                image: "https://picsum.photos/id/25/800/400",
+                title: "Slide 1",
+            },
+            {
+                image: "https://picsum.photos/id/27/800/400",
+                title: "Slide 2",
+            },
+            {
+                image: "https://picsum.photos/id/28/800/400",
+                title: "Slide 3",
+            },
+            {
+                image: "https://picsum.photos/id/29/800/400",
+                title: "Slide 4",
+            }
+        ];
+    
+        const slides = document.getElementById("slides");
+        const slideTitle = document.getElementById("slide-title");
+        const dots = document.getElementById("dots");
+        
+        let currentIndex = 0;
+  
+        const innitSlideShow = () => {
+            slides.innerHTML = slidesData.map(data => `<li><img src="${data.image}" alt="${data.title}"></li>`).join("\n");
+            dots.innerHTML = slidesData.map((data, index) => `<li class="dot ${index === 0 ? "active" : ""}"></li>`).join("\n");
+            slideTitle.textContent = slidesData[currentIndex].title;
+        }
+
+        const showSlide = () => {
+            slides.style.transform = `translateX(-${currentIndex * 800}px)`;
+            showTitle();
+            activeDot();
+        }
+
+        const showPreviousSlide = () => {
+           currentIndex === 0 ? currentIndex = slidesData.length - 1 : currentIndex--;
+            showSlide();
+        }
+
+        const showNextSlide = () => {
+            currentIndex === slidesData.length - 1 ? currentIndex = 0 : currentIndex++;
+            showSlide();
+        }
+
+        const showTitle = () => {
+            slideTitle.textContent = slidesData[currentIndex].title; 
+        } 
+
+        const activeDot = () => {
+            dots.children[currentIndex].classList.add("active");
+            for(let i = 0; i < dots.children.length; i++) {
+                i != currentIndex ?  dots.children[i].classList.remove("active") : "";
+            }
+        }
+
+        innitSlideShow();
+        setInterval(() => showNextSlide(), 3000);
+    </script>
+</body>
+</html>

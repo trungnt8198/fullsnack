@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Danh Sách Sản Phẩm</h2>
+    <table cellpadding="0" cellspacing="0" width="100%" border="1" id="product_table">
+        <thead>
+          <tr>
+            <th width="5%">STT</th>
+            <th>Tên sản phẩm</th>
+            <th width="10%">Giá</th>
+            <th width="10%">Thêm vào giỏ</th>
+          </tr>
+        </thead>
+    </table>
+    <h2>GIỎ HÀNG</h2>
+    <div id="cart_data"></div>
+    <script>
+        const products = [
+            { name: "Sản phẩm 1", price: 1000},
+            { name: "Sản phẩm 2", price: 2000},
+            { name: "Sản phẩm 3", price: 3000},
+            { name: "Sản phẩm 3", price: 4000},
+        ];
+
+        const productTable = document.getElementById("product_table");
+        const cartData = document.getElementById("cart_data");
+
+        const displayProduct = (products) => {
+            const tbody = document.createElement("tbody");
+            productTable.appendChild(tbody);
+            products.forEach((product, index) => {
+                let productRow = document.createElement("tr");
+                productRow.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${product.name}</td>
+                    <td>${product.price}</td>
+                    <td>
+                        <input style="margin: 0 5px; height: 20px" type="number" id="${index}" min="1" step="1" value="1">
+                        <button type="button" style="width: 100%" onclick="addToCart(${index})">Thêm vào giỏ</button>
+                    </td>
+                `;
+                tbody.appendChild(productRow);
+            });
+        }
+
+    
+
+        const displayCart = () => {
+            cartData.innerHTML = "";
+
+            if (!sessionStorage.getItem("cart")) {
+                cartData.innerHTML = "<p>Giỏ hàng không có sản phẩm</p>";
+                return;
+            }
+
+            const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+            
+            const cartTable = document.createElement("table");
+            cartData.appendChild(cartTable);
+            cartTable.cellPadding = "0";
+            cartTable.cellSpacing = "0";
+            cartTable.style.width = "100%";
+            cartTable.border = "1"
+            cartTable.id = "cart_table";
+            cartTable.innerHTML = `
+                <thead>
+                <tr>
+                    <th width="5%">STT</th>
+                    <th width="30%">Tên sản phẩm</th>
+                    <th width="20%">Giá</th>
+                    <th width="20%">Số Lượng</th>
+                    <th width="20%">Thành Tiền</th>
+                    <th>Xóa</th>
+                </tr>
+                </thead>`;
+
+            const tbody = document.createElement("tbody");
+            cartTable.appendChild(tbody);
+            
+            let totalValue = 0;
+            let totalQuantity = 0;
+            sessionCart.forEach((data, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${products[data.id].name}</td>
+                        <td>${products[data.id].price}</td>
+                        <td><input id="cart_${data.id}" type="number" min="1" step="1" value="${data.quantity}"></td>
+                        <td>${products[data.id].price * data.quantity}</td>
+                        <td><button type="button" onclick="removeFromCart(${data.id})">Xóa</button></td>
+                    </tr>`;
+                totalValue += products[data.id].price * data.quantity;
+                totalQuantity += data.quantity;
+            });
+
+
+            const tfoot = document.createElement("tfoot");
+            cartTable.appendChild(tfoot);
+            tfoot.innerHTML = `
+                <tr>
+                    <td colspan="3">Tổng</td>
+                    <td>${totalQuantity}</td>
+                    <td colspan="2">${totalValue}</td>
+                </tr>`;
+
+            const updateCartBtn = `<button type="button" onclick="updateCart()">Cập nhật giỏ hàng</button>`;
+            const deleteCartBtn = `<button type="button" onclick="deleteCart()" style="margin: 5px">Xóa giỏ hàng</button>`;
+
+            cartData.appendChild(document.createElement("hr"));
+            cartData.innerHTML += updateCartBtn;
+            cartData.innerHTML += deleteCartBtn;
+        }
+
+        const addToCart = (id) => {
+            let quantity = document.getElementById(id).value;
+            if(quantity === "" || parseInt(quantity) < 1) {
+                quantity = 1;
+            }
+
+            quantity = parseInt(quantity);
+
+            let sessionCart = [];
+            if(!sessionStorage.getItem("cart")) {
+                sessionCart.push({id, quantity});
+            }
+            else {
+                sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+                const cartInfo = sessionCart.find(data => data.id === id);
+                cartInfo ? cartInfo.quantity += quantity : sessionCart.push({id, quantity}); 
+            }
+
+            sessionStorage.setItem("cart", JSON.stringify(sessionCart));
+            displayCart();
+        }
+
+        const removeFromCart = (id) => {
+            if(confirm("Are you sure ?")) {
+                let sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+                sessionCart = sessionCart.filter(data => data.id != id);
+                sessionCart.length === 0 ? sessionStorage.removeItem("cart") : sessionStorage.setItem("cart", JSON.stringify(sessionCart));
+                displayCart();
+            }
+        }
+
+        const updateCart = () => {
+            const inputs = document.querySelectorAll("input[id^='cart_']");
+            let sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+            inputs.forEach(input => {
+                const id = input.id.split("_")[1];
+                const quantity = parseInt(input.value);
+                sessionCart.find(data => data.id == id).quantity = quantity;
+            });
+            sessionCart = sessionCart.filter(data => data.quantity > 0);
+            sessionCart.length === 0 ? sessionStorage.removeItem("cart") : sessionStorage.setItem("cart", JSON.stringify(sessionCart));
+            displayCart();
+        }
+
+        const deleteCart = () => {
+            if(confirm("Are you sure ?")) {
+                sessionStorage.removeItem("cart");
+                displayCart();
+            }
+        }
+        
+        displayProduct(products);
+        displayCart();
+    </script>
+</body>
+</html>

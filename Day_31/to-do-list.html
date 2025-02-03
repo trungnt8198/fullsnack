@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: cornflowerblue;
+        background-image: url("https://assets.weforum.org/article/image/1AMOAkzsQvNkWWqN832FcftekobBbq9PvTHYez21qaA.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .container {
+        width: 600px;
+        min-height: 400px;
+        background-color: lightgrey;
+        padding: 20px;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        opacity: 0.8;
+    }
+
+    #status-filter {
+        width: 150px;
+        height: 30px;
+        cursor: pointer;
+    }
+
+    #todos {
+        list-style-type: none;
+        margin-top: 20px;
+        padding: 0;
+        max-height: 350px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        padding: 5px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: rgb(2, 59, 2);
+    }
+
+    li {
+        list-style: none;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    button {
+        cursor: pointer;
+        height: 30px;
+        width: 70px;
+    }
+
+    .todo {
+        outline: none;
+        border: none;
+        color: black;
+    }
+
+
+    input[type="text"] {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        height: 30px;
+        width: 300px;
+        font-size: 20px;
+    }
+
+    input[type="checkbox"] {
+        margin: 0;
+        padding: 0;
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+    }
+
+    li[data-status="Incomplete"] .todo {
+        background-color: yellow;
+    }
+
+    li[data-status="Completed"] .todo {
+        background-color: limegreen;
+        text-decoration: line-through;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+        <form>
+            <input type="text" id="todo" placeholder="Add to do.....">
+            <button hidden type="submit" onclick="addTodo(event)">Add</button>
+            <select id="status-filter" onchange="filterTodos(event)">
+                <option>All</option>
+                <option>Incomplete</option>
+                <option>Completed</option>
+            </select>
+        </form>
+    
+        <ul id="todos"></ul>
+    </div>
+
+    <script>
+        const ul = document.getElementById("todos");
+        const input = document.getElementById("todo");
+
+        const getTodos = () => {
+            const todos = JSON.parse(localStorage.getItem("todos"));
+            return !todos ? [] : todos;
+        }
+
+        const displayTodos = () => {
+            let todos = getTodos();
+            todos.forEach((todo, id) => createTodo(todo, id));
+        }
+
+        const createTodo = ({value, status}, id) => {
+            const li = `
+                <li id=${id} data-status="${status}">
+                    <form>
+                        <input onchange="updateStatus(${id})" type="checkbox" ${status === "Completed" ? "checked" : ""}>
+                        <input class="todo" type="text" value="${value}" disabled>
+                        <button type="button" onclick="editTodo(event, ${id})">Edit</button>
+                        <button type="button" onclick="removeTodo(${id})">Remove</button>
+                    </form>
+                </li>`;
+            ul.innerHTML += li;
+        }
+
+        const addTodo = (event) => {
+            event.preventDefault();
+            if(validateInput(input.value) === "Invalid") {
+                alert("Input must not be empty");
+                return;
+            }
+            const todo = {value: input.value, status: "Incomplete"};
+            if(saveToLocalStorage(todo)) {
+                const id = ul.children.length;
+                createTodo(todo, id);
+                input.value = "";
+            }
+        }
+
+        const saveToLocalStorage = (todo) => {
+            let todos = getTodos();
+            if(isExistedTodo(todos, todo)) {
+                alert("This To-Do already exists, please try another one");
+                return false;
+            }
+            todos.push(todo);
+            localStorage.setItem("todos", JSON.stringify(todos));
+            return true;
+        }
+
+        const validateInput = (value) => {
+            if(!value || value.trim().length < 1) {
+                return "Invalid"; 
+            }
+            return "Valid";          
+        }
+
+        const removeTodo = (id) => {
+            if(confirm("Are you sure ?")) {
+                const todo = document.getElementById(id);
+                ul.removeChild(todo);
+
+                let todos = getTodos();
+                todos.splice(id, 1);
+                localStorage.setItem("todos", JSON.stringify(todos));
+            }
+        }
+
+        const editTodo = (event, id) => {
+            event.preventDefault();
+            const todo = document.getElementById(id);
+            todo.dataset.oldValue = todo.innerHTML;
+
+            todo.children[0].children[0].style.display = "none";
+
+            const todoTextInput = todo.children[0].children[1];
+            todoTextInput.style.backgroundColor = "orange";
+            todoTextInput.disabled = false;
+            todoTextInput.focus();
+
+            todo.children[0].children[2].outerHTML = `
+                <button type="submit" onclick="updateTodo(event, ${id})">Save</button>
+                <button type="button" onclick="cancelEdit(${id})">Cancel</button>
+            `;
+        }
+
+        const updateTodo = (event, id) => {
+            event.preventDefault();
+            const todo = document.getElementById(id);
+
+            todo.dataset.newValue = todo.children[0].children[1].value;
+            if(todo.dataset.newValue.trim().length === 0) {
+                alert("New value must not be empty");
+                return;
+            }
+
+            const todos = getTodos();
+            if(isExistedTodo(todos, todo.children[0].children[1])) {
+                alert("This To-Do already exists, please try another one");
+                todo.innerHTML = todo.dataset.oldValue;
+            }
+            todos[id].value = todo.dataset.newValue;
+            localStorage.setItem("todos", JSON.stringify(todos));
+            todo.innerHTML = todo.dataset.oldValue;
+            todo.children[0].children[1].value = todos[id].value;
+            todo.children[0].children[0].style.display = "inline-block";
+        }
+
+        const cancelEdit = (id) => {
+            const todo = document.getElementById(id);
+            todo.innerHTML = todo.dataset.oldValue; 
+        }
+
+        const updateStatus = (id) => {
+            const todo = document.getElementById(id);
+            const currentStatus = todo.dataset.status;
+            todo.dataset.status = currentStatus === "Incomplete" ? "Completed" : "Incomplete";
+            todo.children[0].children[0].toggleAttribute("checked");
+
+            const todos = getTodos();
+            todos[id].status =  todo.dataset.status;
+            localStorage.setItem("todos", JSON.stringify(todos));
+
+            const statusFilter = document.getElementById("status-filter");
+            const updateStatusFilter = new Event("change");
+            statusFilter.dispatchEvent(updateStatusFilter);
+        }
+
+        const filterTodos = (event) => {
+            const status = event.target.value;
+            const todos = Array.from(ul.children);
+            for(todo of todos) {
+                if (status == "All" || todo.dataset.status === status) {
+                    todo.style.display = "block";
+                } else {
+                    todo.style.display = "none";
+                }
+            }
+        }
+
+        const isExistedTodo = (todos, todo) => {
+            return todos.some(oldTodo => oldTodo.value == todo.value); 
+        }
+
+        displayTodos();
+    </script>
+</body>
+</html>

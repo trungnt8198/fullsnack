@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .d-none {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="toogleForm()">Toggle</button>
+
+    <form class="d-none" id="registerForm" action="">Dang Ky</form>
+    <form id="loginForm" action="">Dang Nhap</form>
+
+    <script>
+        const registerForm = document.getElementById("registerForm");
+        const loginForm = document.getElementById("loginForm");
+        const toogleForm = () => {
+            registerForm.classList.toggle("d-none");
+            loginForm.classList.toggle("d-none");
+        }
+    </script>
+</body>
+</html>
