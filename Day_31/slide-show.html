@@ -112,7 +112,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <span>Data Error</span>
+    <div class="container" id="App">
         <div id="slide-show">
             <ul id="slides"></ul>
             <button class="slide-show__btn" id="prev" type="button" onclick="showPreviousSlide()">&lt;</button>
@@ -140,6 +141,15 @@
                 title: "Slide 4",
             }
         ];
+
+        const app = document.getElementById("App");
+        if(slidesData === null || slidesData.length === 0) {
+            app.style.display = "none";
+        }
+        else {
+            document.querySelector("span").style.display = "none";
+            app.style.display = "flex";
+        }
     
         const slides = document.getElementById("slides");
         const slideTitle = document.getElementById("slide-title");
@@ -181,7 +191,19 @@
         }
 
         innitSlideShow();
-        setInterval(() => showNextSlide(), 3000);
+        let pause = true;
+
+        const myInterval = setInterval(() =>  {
+            if(pause) showNextSlide()
+        }, 3000);
+
+        slides.addEventListener("mouseover", function () {
+            pause = false;
+        });
+
+        slides.addEventListener("mouseout", function () {
+            pause = true;
+        });
     </script>
 </body>
 </html>

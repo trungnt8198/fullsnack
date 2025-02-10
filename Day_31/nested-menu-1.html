@@ -137,9 +137,14 @@
             return menu;
         }
 
-        const menu = document.createElement("ul");
-        document.body.appendChild(menu);
-        menu.outerHTML = buildMenu(categories);
+        if(categories === null || categories.length === 0) {
+            document.body.innerHTML = "Data Error";
+        }
+        else {
+            const menu = document.createElement("ul");
+            document.body.appendChild(menu);
+            menu.outerHTML = buildMenu(categories);
+        }
     </script>
 </body>
 </html>

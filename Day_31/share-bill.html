@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        .container {
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 440px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            
+            &:not(:last-child) {
+                margin-bottom: 15px;
+            }
+
+            label {
+                margin-bottom: 10px;
+                cursor: pointer;
+
+                span {
+                    color: red;
+                    opacity: 0;
+                    transition: opacity ease-in-out 1.5s;
+                }
+            }
+
+            input {
+                width: 400px;
+                height: 30px;
+            }
+        }
+
+        button {
+            padding: 10px 10px;
+            background-color: green;
+            color: white;
+            border: transparent;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            outline: auto;
+            background-color: white;
+            color: green;
+        }
+
+        p {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chia Bill</h1>
+        <div>
+            <div class="input-group">
+                <label for="total"><b>Tổng bill: </b><span></span></label>
+                <input type="text" id="total">
+            </div>
+            <div class="input-group">
+                <label for="quantity"><b>Số người chia: </b><span></span></label>
+                <input type="text" id="quantity">
+            </div>
+            <div class="input-group">
+                <label for="tip"><b>Tiền tip: </b><span></span></label>
+                <input type="text" id="tip" placeholder="Nhập tiền tip (nếu có)...">
+            </div>
+        </div>
+        <button type="button" onclick="shareBill()">Tính tiền</button>
+        <div>
+            <p id="amountPerEach"></p>
+            <p id="totalAmount"></p>
+        </div>
+    </div>
+    <script>
+        const inputs = document.querySelectorAll("input[type='text']");
+        const amountPerEach = document.getElementById("amountPerEach");
+        const totalAmount = document.getElementById("totalAmount");
+        let totalBill = 0;
+
+        const showError = (inputField, errorMessage) => {
+            const label = document.querySelector(`label[for="${inputField.id}"]`);
+            const span = label.querySelector("span");
+            span.innerText = errorMessage;
+            span.style.opacity = "1";
+
+            setTimeout(() => {
+                span.style.opacity = "0";
+            }, 1500);
+        }
+
+        const validateInput = (input) => {
+            const value = input.value;
+            const floatValue = parseFloat(value);
+
+            if(input.id !== "tip" && value === "") {
+                showError(input, "Không được để trống")
+                return false;
+            }
+
+            if(value.includes(" ")) {
+                showError(input, "Vui lòng nhập số không chứa khoảng trắng");
+                return false;
+            }
+
+            if(input.id !== "id" && isNaN(value)) {
+                showError(input, "Phải là số");
+                return false;
+            }
+
+            if(input.id === "tip" && value !== "" && isNaN(value)) {
+                showError(input, "Phải là số");
+                return false;
+            }
+
+            if(input.id === "quantity" && !Number.isInteger(floatValue)) {
+                showError(input, "Phải là số nguyên");
+                return false;
+            }
+            
+            if(input.id !== "tip" && value <= 0) {
+                showError(input, "Phải lớn hơn 0");
+                return false;
+            }
+
+            if(input.id === "tip" && value !== "") {
+                if(floatValue < 0) {
+                    showError(input, "Phải lớn hơn hoặc bằng 0");
+                    return false;
+                }
+                if(floatValue > totalBill) {
+                    showError(input, "Phải nhỏ hơn hoặc bằng tổng bill");
+                    return false;
+                }
+            }
+
+            if(input.id === "total") {
+                totalBill = floatValue;
+            }
+            showError(input, "");
+            return true;
+        }
+
+        const validateInputs = (inputs) => {
+            let result = true;
+            inputs.forEach(input => {
+                if(!validateInput(input)) {
+                    result = false;
+                }
+            });
+            return result;
+        }
+
+        const shareBill = () => {
+            amountPerEach.innerText = "";
+            totalAmount.innerText = "";
+
+            if(!validateInputs(inputs)) {
+                return;
+            }
+            
+            const totalBill = parseFloat(inputs[0].value);
+            const quantity = parseFloat(inputs[1].value);
+            let tip = inputs[2].value === "" ? 0 : parseFloat(inputs[2].value);
+
+            const sharedAmount = ((totalBill + tip) / quantity).toFixed(2);
+            const billAfterTip = (totalBill + tip).toFixed(2);
+
+            amountPerEach.innerText = `Mỗi người cần trả: ${sharedAmount} VND`;
+            totalAmount.innerText = `Tổng số tiền cần trả: ${billAfterTip} VND`;
+        }
+    </script>
+</body>
+</html>

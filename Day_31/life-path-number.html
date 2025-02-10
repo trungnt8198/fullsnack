@@ -43,7 +43,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <span style="color: red">Data Error</span>
+    <div class="container" id="App">
         <h1>Ứng dụng Thần Số Học</h1>
         <div>
             <label for="dob">Nhập ngày sinh của bạn:</label>
@@ -67,6 +68,15 @@
             8: "Bạn là người kiên trì, có tham vọng và luôn nỗ lực hết mình. Bạn có sức mạnh và khả năng lãnh đạo trong mọi lĩnh vực.",
             9: "Bạn là người có tấm lòng nhân ái, giúp đỡ và quan tâm đến người khác. Bạn có tính cách giàu tình cảm và thích giúp đỡ cộng đồng.",
         };
+
+        const app = document.getElementById("App");
+        if(descriptions === null ||Object.keys(descriptions).length === 0) {
+            app.style.display = "none";
+        }
+        else {
+            document.querySelector("span").style.display = "none";
+            app.style.display = "flex";
+        }
 
         const dob = document.getElementById("dob");
         const noti = document.getElementById("notification");

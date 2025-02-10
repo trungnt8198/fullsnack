@@ -6,19 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Danh Sách Sản Phẩm</h2>
-    <table cellpadding="0" cellspacing="0" width="100%" border="1" id="product_table">
-        <thead>
-          <tr>
-            <th width="5%">STT</th>
-            <th>Tên sản phẩm</th>
-            <th width="10%">Giá</th>
-            <th width="10%">Thêm vào giỏ</th>
-          </tr>
-        </thead>
-    </table>
-    <h2>GIỎ HÀNG</h2>
-    <div id="cart_data"></div>
+    <span>Data Error</span>
+    <div id = "App">
+        <h2>Danh Sách Sản Phẩm</h2>
+        <table cellpadding="0" cellspacing="0" width="100%" border="1" id="product_table">
+            <thead>
+              <tr>
+                <th width="5%">STT</th>
+                <th>Tên sản phẩm</th>
+                <th width="10%">Giá</th>
+                <th width="10%">Thêm vào giỏ</th>
+              </tr>
+            </thead>
+        </table>
+        <h2>GIỎ HÀNG</h2>
+        <div id="cart_data"></div>
+    </div>
     <script>
         const products = [
             { name: "Sản phẩm 1", price: 1000},
@@ -26,6 +29,14 @@
             { name: "Sản phẩm 3", price: 3000},
             { name: "Sản phẩm 3", price: 4000},
         ];
+
+        const app = document.getElementById("App");
+        if(products === null || products.length === 0) {
+            app.style.display = "none";
+        }
+        else {
+            document.querySelector("span").style.display = "none";
+        }
 
         const productTable = document.getElementById("product_table");
         const cartData = document.getElementById("cart_data");

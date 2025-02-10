@@ -45,7 +45,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <span>Data Error</span>
+    <div class="container" id="App">
         <h1>Bói Bài Tarot</h1>
         <button onclick="drawACard()">Rút Bài</button>
         <h2 id="card-name"></h2>
@@ -378,6 +379,15 @@
             description: "Sự thịnh vượng, khả năng quản lý tài chính và sự ổn định.",
             },
         ];
+            
+        const app = document.getElementById("App");
+        if(tarotDeck === null || tarotDeck.length === 0) {
+            app.style.display = "none";
+        }
+        else {
+            document.querySelector("span").style.display = "none";
+            app.style.display = "flex";
+        }
 
         const cardName = document.getElementById("card-name");
         const cardDesc = document.getElementById("card-description");
