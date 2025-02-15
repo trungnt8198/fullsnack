@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: antiquewhite;
+        }
+
+        .container {
+            width: 250px;
+            padding: 20px;
+            position: absolute;
+            text-align: center;
+            border-radius: 30px;
+            background-color: greenyellow;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        button {
+            margin-top: 10px;
+            width: 50px;
+            height: 30px;
+            cursor: pointer;
+            border-radius: 10px;
+            border: transparent;
+
+            &:hover {
+                background-color: aqua;
+            }
+        }
+
+        .d-none {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="form-title">Login</h2>
+        <form id="form-login">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter email..." required>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password..." required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="#" id="register-link">No account ? Register now</a>
+        <form id="form-register" class="d-none">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter email..." required>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password..." required>
+            <label>Confirm Password</label>
+            <input type="password" name="confirmPassword" placeholder="Enter password again...">
+            <button type="submit">Register</button>
+        </form>
+        <a class="d-none" href="#" id="login-link">Have an account ? Login now</a>
+    </div>
+    <script type="module">
+        import callAPI from "./common.js";
+
+        const formTitle = document.getElementById("form-title");
+        const formRegister = document.querySelector("#form-register");
+        const formLogin = document.querySelector("#form-login");
+        const registerLink = document.querySelector("#register-link");
+        const loginLink = document.querySelector("#login-link");
+        const API_SERVER = "http://localhost:3000";
+
+        registerLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            registerLink.classList.toggle("d-none");
+            formLogin.classList.toggle("d-none");
+            formRegister.classList.toggle("d-none");
+            loginLink.classList.toggle("d-none");
+            formTitle.innerText = "Register";
+        });
+
+        loginLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            loginLink.classList.toggle("d-none");
+            formLogin.classList.toggle("d-none");
+            formRegister.classList.toggle("d-none");
+            registerLink.classList.toggle("d-none");
+            formTitle.innerText = "Login";
+        });
+
+        formLogin.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const formData = Object.fromEntries(new FormData(formLogin));
+            if(!isValidFormData(formData)) {
+                return;
+            }
+            let url = `${API_SERVER}/login`; 
+            callAPI(url, "POST", formData).then(response => {
+                if(response.error) {
+                    alert("Error: " + response.error);
+                }
+                else {
+                    if(response.status !== 200) {
+                        alert("Incorrect email or password !");
+                    }
+                    else {
+                        localStorage.setItem("user", JSON.stringify({
+                            accessToken: response.data.accessToken, 
+                            email: response.data.user.email, 
+                            id: response.data.user.id}));
+                        window.location.href = "task-management.html";
+                    }
+                }
+            });
+        })
+
+        formRegister.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const formData = Object.fromEntries(new FormData(formRegister));
+            if(!isValidFormData(formData)) {
+                return;
+            }
+            formData.confirmPassword = undefined;
+
+            let url = `${API_SERVER}/register`;
+            callAPI(url, "POST", formData).then(response => {
+                if(response.error) {
+                    alert("Error: " + response.error);
+                }
+                else {
+                    if(response.status !== 201) {
+                        alert(response.data);
+                    }
+                    else {
+                        alert("Your account has been registered successfully");
+                        formLogin["email"].value = formData.email;
+                        formLogin["password"].value = formData.password;
+                        loginLink.click();
+                    }
+                }
+            });
+        })
+
+        function isValidFormData(data) {
+            Object.keys(data).forEach(key => {
+                if(data[key].includes(" ")) {
+                    alert(`${key} must not contain any spaces`);
+                }
+                return false;
+            });
+            if(data.password.length < 6) {
+                alert("Password must contain at least 6 characters");
+                return false;
+            }
+            if(data.hasOwnProperty("confirmPassword") != "" && data.confirmPassword !== data.password) {
+                alert("Confirm password must be the same with Password");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 99%;
+            margin: 20px auto;
+        }
+
+        #welcome {
+            font-size: 20px;
+            text-align: right;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        #button-logout {
+            float: right;
+            width: 60px;
+            cursor: pointer;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+
+        tbody tr {
+            height: 30px;
+        }
+
+        .task-control {
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+            width: 99%;
+        }
+
+        input, select {
+            height: 24px;
+            width: 250px;
+            cursor: pointer;
+        }
+
+        select {
+            width: 88px;
+        }
+
+        button {
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .task-control button {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <p id="welcome">Welcome </p>
+    <button id="button-logout">Logout</button>
+    <h1>Tasks Management Table</h1>
+    <div class="task-control">
+        <div>
+            <input type="text" id="task-input" placeholder="Add some todo...">
+            <button type="button" id="add-task-button">Add</button>
+        </div>
+        <div>
+            <input type="text" id="search-input" placeholder="Enter to search by title...">
+            <button type="button" id="search-button">Search</button>
+        </div>
+        <div>
+            <label for="status-filter">Status Filter</label>
+            <select id="status-filter">
+                <option value="">All</option>
+                <option value="Todo">Todo</option>
+                <option value="Doing">Doing</option>
+                <option value="Done">Done</option>
+            </select>
+        </div>
+        <div>
+            <label for="priority-filter">Priority Filter</label>
+            <select id="priority-filter">
+                <option value="">All</option>
+                <option value="1">1 - Low</option>
+                <option value="2">2 - Medium</option>
+                <option value="3">3 - High</option>
+            </select>
+        </div>
+        <div>
+            <label for="priority-sort">Priority Sort</label>
+            <select id="priority-sort">
+                <option value="">Default</option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
+        <button type="button" id="reload-button">Reload</button>
+    </div>
+    <table id="tasks" cellpadding="0" cellspacing="0">
+        <thead>
+            <th style="width: 60%">Title</th>
+            <th style="width: 10%">Status</th>
+            <th>Priority</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script type="module">
+        import callAPI from "./common.js";
+
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        const addTaskInput = document.getElementById("task-input");
+        const searchInput = document.getElementById("search-input");
+        const taskTable = document.getElementById("tasks");
+        const addTaskButton = document.getElementById("add-task-button");
+        const logoutButton = document.getElementById("button-logout");
+        const searchButton = document.getElementById("search-button");
+        const prioritySort = document.getElementById("priority-sort");
+        const priorityFilter = document.getElementById("priority-filter");
+        const statusFilter = document.getElementById("status-filter");
+        const reloadButton = document.getElementById("reload-button");
+        const API_SERVER = "http://localhost:3000";
+
+        let localTasks = [];
+
+        if(!user) {
+            document.body.innerHTML = "<h1 style='color: red'>Unauthorized</h1>";
+        }
+        else {
+            welcome();
+            fetchTasksByUser();
+        }
+
+        logoutButton.addEventListener("click", function() {
+            if(confirm("Logout now, are you sure ?")) {
+                localStorage.clear();
+                window.location.replace("authentication.html");
+            }
+        });
+
+        function fetchTasksByUser() {
+            callAPI(`${API_SERVER}/tasks?userId=${user.id}`, "GET")
+            .then(response => {
+                if(response.error) {
+                    alert("Error: " + response.error);
+                }
+                else {
+                    localTasks = response.data;
+                    displayTasks(localTasks);
+                }
+            })
+        }
+
+        function welcome() {
+            const p = document.getElementById("welcome");
+            p.innerHTML += `<span style="color: green">${user.email}</span>`;
+        }
+
+        function createTask() {
+            const taskTitle = addTaskInput.value.trim();
+            if(taskTitle === "") {
+                alert("Task title must not be empty");
+                return;
+            }
+            if(localTasks.some(task => task.title === taskTitle)) {
+                alert("This task title is duplicated, please try another");
+                return;
+            }
+            let requestBody = {title: taskTitle, priority: 1, status: "Todo", userId: user.id};
+            callAPI(`${API_SERVER}/tasks`, "POST", requestBody)
+            .then(response => {
+                if(response.error) {
+                    alert("Error: " + response.error);
+                }
+                else {
+                    localTasks.push(response.data);
+                    displayTasks(localTasks);
+                }
+            });
+        }
+
+        addTaskButton.addEventListener("click", (e) => createTask(e));
+
+        function displayTasks(tasks) {
+            let tbody = taskTable.querySelector("tbody");
+            let tbodyData = tasks.map(task => `
+            <tr>
+                <td>${task.title}</td>
+                <td>${task.status}</td>
+                <td>${task.priority}</td>
+                <td>
+                    <button type="button" onclick="updateTask(${task.id})">
+                        <box-icon name='edit'></box-icon>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" onclick="deleteTask(${task.id})">
+                        <box-icon name='trash'></box-icon>
+                    </button>
+                </td>
+            </tr>`).join("\n");
+            tbody.innerHTML = tbodyData;
+        }
+
+        // reloadButton.addEventListener("click", function(){
+        //     searchInput.value = "";
+        //     statusFilter.value = "";
+        //     priorityFilter.value = "";
+        //     prioritySort.value = "";
+        //     fetchTasksByUser();
+        // });
+
+        // function fetchTaskByCriteria() {
+        //     let queryString = "?userId=" + user.id;
+        //     if(searchInput.value.trim() !== "") {
+        //         queryString += "&title_like=" + searchInput.value.trim();
+        //     }
+        //     if(statusFilter.value !== "") {
+        //         queryString += "&status=" + statusFilter.value;
+        //     }
+        //     if(priorityFilter.value !== "") {
+        //         queryString += "&priority=" + priorityFilter.value;
+        //     }
+        //     if(prioritySort.value !== "") {
+        //         queryString += "&_sort=priority&_order=" + prioritySort.value;
+        //     }
+        //     callAPI(`${API_SERVER}/tasks${queryString}`, "GET")
+        //     .then(response => {
+        //         if(response.error) {
+        //             alert("Error: " + response.error);
+        //         }
+        //         else {
+        //             displayTasks(response.data);
+        //         }
+        //     })
+        // }
+
+        // function getTaskByCriteria() {
+        //     let filteredTasks = [...localTasks];
+
+        //     if(searchInput.value.trim() !== "") {
+        //         filteredTasks = filteredTasks.filter(task => task.title.includes(searchInput.value.trim()));
+        //     }
+        //     if(statusFilter.value !== "") {
+        //         filteredTasks = filteredTasks.filter(task => task.status == statusFilter.value);
+        //     }
+        //     if(priorityFilter.value !== "") {
+        //         filteredTasks = filteredTasks.filter(task => task.priority == priorityFilter.value);
+        //     }
+        //     if(prioritySort.value !== "") {
+        //         if(prioritySort.value === "asc") {
+        //             filteredTasks.sort((t1, t2) => t1.priority - t2.priority);
+        //         }
+        //         else {
+        //             filteredTasks.sort((t1, t2) => t2.priority - t1.priority);
+        //         }
+        //     }
+        //     displayTasks(filteredTasks);
+        // }
+
+        // searchButton.addEventListener("click", function(){
+        //     if(searchInput.value.trim() !== "") {
+        //         getTaskByCriteria();
+        //     }
+        //     else {
+        //         alert("Search string must not be empty!");
+        //     }
+        // });
+        // statusFilter.addEventListener("change", () => getTaskByCriteria());
+        // priorityFilter.addEventListener("change", () => getTaskByCriteria());
+        // prioritySort.addEventListener("change", () => getTaskByCriteria());
+    </script>
+</body>
+</html>
