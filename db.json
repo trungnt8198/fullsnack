@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "email": "trung@gmail.com",
+      "password": "$2a$10$fIfHFgqAtEk0h0x6lLuA8.FrxsuhWuwIypp4POVYly8DncOuYTAK6",
+      "id": 1
+    }
+  ],
+  "tasks": [
+    {
+      "title": "hello",
+      "priority": "1",
+      "status": "To do",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "title": "hixxxxxxxx",
+      "priority": "2",
+      "status": "Done",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "title": "morning",
+      "priority": "1",
+      "status": "Doing",
+      "userId": 1,
+      "id": 3
+    }
+  ]
+}
